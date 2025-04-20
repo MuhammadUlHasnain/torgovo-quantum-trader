@@ -1,7 +1,6 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowUpRight, Bot, LineChart, Activity, TrendingUp, TrendingDown, Percent, DollarSign } from "lucide-react";
+import { ArrowUpRight, Bot, LineChart, Activity, TrendingUp, TrendingDown, Percent, DollarSign, PlusCircle, Database, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Mock data for charts - In a real app, this would come from an API
