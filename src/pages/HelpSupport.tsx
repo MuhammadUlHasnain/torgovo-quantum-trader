@@ -32,7 +32,8 @@ import {
   Info,
   ThumbsUp,
   ThumbsDown,
-  Upload
+  Upload,
+  Clock
 } from "lucide-react";
 import { 
   Select,
@@ -53,10 +54,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
 
 const HelpSupport = () => {
   const [searchQuery, setSearchQuery] = useState("");
   
+  // Create form instance for the support form
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      category: "",
+      subject: "",
+      description: "",
+      priority: "",
+    },
+  });
+
   // Support categories with icons
   const supportCategories = [
     { name: "Getting Started", icon: BookOpen, color: "from-torgovo-blue to-torgovo-purple" },
@@ -130,6 +144,11 @@ const HelpSupport = () => {
       timestamp: "1 day ago"
     }
   ];
+
+  const onSubmit = (data) => {
+    console.log("Support form submitted:", data);
+    // Here you would typically send the form data to your backend
+  };
 
   return (
     <Layout>
@@ -503,10 +522,11 @@ const HelpSupport = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Form>
-                    <div className="space-y-6">
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormField
+                          control={form.control}
                           name="name"
                           render={({ field }) => (
                             <FormItem>
@@ -519,6 +539,7 @@ const HelpSupport = () => {
                         />
                         
                         <FormField
+                          control={form.control}
                           name="email"
                           render={({ field }) => (
                             <FormItem>
@@ -532,11 +553,12 @@ const HelpSupport = () => {
                       </div>
                       
                       <FormField
+                        control={form.control}
                         name="category"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Issue Category</FormLabel>
-                            <Select>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
                                   <SelectValue placeholder="Select a category" />
@@ -559,6 +581,7 @@ const HelpSupport = () => {
                       />
                       
                       <FormField
+                        control={form.control}
                         name="subject"
                         render={({ field }) => (
                           <FormItem>
@@ -571,6 +594,7 @@ const HelpSupport = () => {
                       />
                       
                       <FormField
+                        control={form.control}
                         name="description"
                         render={({ field }) => (
                           <FormItem>
@@ -590,11 +614,12 @@ const HelpSupport = () => {
                       />
                       
                       <FormField
+                        control={form.control}
                         name="priority"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Priority</FormLabel>
-                            <Select>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
                                   <SelectValue placeholder="Select priority level" />
@@ -622,11 +647,11 @@ const HelpSupport = () => {
                           Max file size: 10MB. Supported formats: JPG, PNG, PDF.
                         </p>
                       </div>
-                    </div>
-                    
-                    <div className="mt-8 flex justify-end">
-                      <Button type="submit" className="bg-torgovo-purple hover:bg-torgovo-purple-dim">Submit Ticket</Button>
-                    </div>
+                      
+                      <div className="mt-8 flex justify-end">
+                        <Button type="submit" className="bg-torgovo-purple hover:bg-torgovo-purple-dim">Submit Ticket</Button>
+                      </div>
+                    </form>
                   </Form>
                 </CardContent>
                 <CardFooter className="flex-col items-start gap-4">
