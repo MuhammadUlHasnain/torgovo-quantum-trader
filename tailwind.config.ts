@@ -61,6 +61,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for futuristic dark theme
+				torgovo: {
+					dark: '#1A1F2C',
+					charcoal: '#403E43',
+					black: '#221F26',
+					blue: '#1EAEDB',
+					purple: '#9b87f5',
+					'purple-dim': '#7E69AB',
+					'purple-light': '#D6BCFA',
+					gray: '#aaadb0',
 				}
 			},
 			borderRadius: {
