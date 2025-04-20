@@ -1,0 +1,94 @@
+
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Check, X } from "lucide-react";
+
+interface ComparisonFeature {
+  name: string;
+  torgovo: boolean | string;
+  competitor1?: boolean | string;
+  competitor2?: boolean | string;
+  competitor3?: boolean | string;
+}
+
+interface ComparisonTableProps extends React.HTMLAttributes<HTMLDivElement> {
+  title?: string;
+  subtitle?: string;
+  competitors: string[];
+  features: ComparisonFeature[];
+}
+
+const ComparisonTable: React.FC<ComparisonTableProps> = ({
+  title,
+  subtitle,
+  competitors,
+  features,
+  className,
+  ...props
+}) => {
+  return (
+    <section className={cn("py-12", className)} {...props}>
+      <div className="container">
+        {(title || subtitle) && (
+          <div className="text-center mb-8">
+            {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
+            {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+          </div>
+        )}
+
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse glass-card">
+            <thead>
+              <tr className="border-b">
+                <th className="p-4 text-left">Features</th>
+                <th className="p-4 text-center bg-torgovo-purple/10 text-torgovo-purple">Torgovo</th>
+                {competitors.map((competitor, index) => (
+                  <th key={index} className="p-4 text-center">{competitor}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {features.map((feature, index) => (
+                <tr key={index} className="border-b last:border-b-0">
+                  <td className="p-4">{feature.name}</td>
+                  <td className="p-4 text-center bg-torgovo-purple/5">
+                    {renderValue(feature.torgovo, true)}
+                  </td>
+                  <td className="p-4 text-center">
+                    {renderValue(feature.competitor1)}
+                  </td>
+                  {feature.competitor2 !== undefined && (
+                    <td className="p-4 text-center">
+                      {renderValue(feature.competitor2)}
+                    </td>
+                  )}
+                  {feature.competitor3 !== undefined && (
+                    <td className="p-4 text-center">
+                      {renderValue(feature.competitor3)}
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+function renderValue(value: boolean | string | undefined, isTorgovo = false) {
+  if (value === undefined) return null;
+  
+  if (typeof value === "boolean") {
+    if (value) {
+      return <Check className={`h-5 w-5 mx-auto ${isTorgovo ? "text-torgovo-purple" : "text-torgovo-blue"}`} />;
+    } else {
+      return <X className="h-5 w-5 mx-auto text-muted-foreground" />;
+    }
+  }
+  
+  return <span className={isTorgovo ? "text-torgovo-purple font-medium" : ""}>{value}</span>;
+}
+
+export default ComparisonTable;
