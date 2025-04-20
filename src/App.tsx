@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -24,6 +23,7 @@ import FAQs from "./pages/FAQs";
 import Blog from "./pages/Blog";
 import HelpSupport from "./pages/HelpSupport";
 import Analytics from "./pages/dashboard/Analytics";
+import ScrollToTop from "./components/layout/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +33,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/grid-bots" element={<GridBots />} />
@@ -44,11 +45,9 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/help-support" element={<HelpSupport />} />
           
-          {/* Authentication Routes */}
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/signup" element={<Signup />} />
           
-          {/* Dashboard Routes */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardHome />} />
             <Route path="bots" element={<BotManagement />} />
@@ -57,7 +56,6 @@ const App = () => (
             <Route path="analytics" element={<Analytics />} />
           </Route>
           
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
