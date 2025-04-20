@@ -86,12 +86,16 @@ const Navbar = () => {
         </NavigationMenu>
 
         <div className="ml-auto flex items-center space-x-4">
-          <Button variant="outline" className="hidden md:flex">
-            Sign In
-          </Button>
-          <Button className="bg-torgovo-purple hover:bg-torgovo-purple-dim text-white">
-            Get Started
-          </Button>
+          <Link to="/auth/login">
+            <Button variant="outline" className="hidden md:flex">
+              Sign In
+            </Button>
+          </Link>
+          <Link to="/auth/signup">
+            <Button className="bg-torgovo-purple hover:bg-torgovo-purple-dim text-white">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

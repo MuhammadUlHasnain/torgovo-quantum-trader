@@ -20,6 +20,10 @@ import BotManagement from "./pages/dashboard/BotManagement";
 import ExchangeConnections from "./pages/dashboard/ExchangeConnections";
 import UserSettings from "./pages/dashboard/UserSettings";
 import DashboardLayout from "./components/dashboard/DashboardLayout";
+import FAQs from "./pages/FAQs";
+import Blog from "./pages/Blog";
+import HelpSupport from "./pages/HelpSupport";
+import Analytics from "./pages/dashboard/Analytics";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +40,9 @@ const App = () => (
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/help-support" element={<HelpSupport />} />
           
           {/* Authentication Routes */}
           <Route path="/auth/login" element={<Login />} />
@@ -47,6 +54,7 @@ const App = () => (
             <Route path="bots" element={<BotManagement />} />
             <Route path="exchanges" element={<ExchangeConnections />} />
             <Route path="settings" element={<UserSettings />} />
+            <Route path="analytics" element={<Analytics />} />
           </Route>
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

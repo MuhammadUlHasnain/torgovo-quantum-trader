@@ -93,13 +93,13 @@ const Footer = () => {
                 <Link to="/about" className="text-muted-foreground hover:text-foreground">About Us</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground">API Documentation</a>
+                <Link to="/faqs" className="text-muted-foreground hover:text-foreground">FAQs</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground">FAQs</a>
+                <Link to="/blog" className="text-muted-foreground hover:text-foreground">Blog</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-foreground">Blog</a>
+                <Link to="/help-support" className="text-muted-foreground hover:text-foreground">Help & Support</Link>
               </li>
             </ul>
           </div>
