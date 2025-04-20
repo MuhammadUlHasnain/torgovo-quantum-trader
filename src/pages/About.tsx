@@ -169,7 +169,7 @@ const About = () => {
                 <MessageSquare className="h-10 w-10 text-torgovo-blue mb-4" />
                 <h3 className="font-medium mb-2">Live Support</h3>
                 <p className="text-muted-foreground">Available 24/7 via our in-app chat</p>
-                <p className="text-muted-foreground mt-1">Response time: < 2 hours</p>
+                <p className="text-muted-foreground mt-1">Response time: &lt; 2 hours</p>
               </div>
               
               <div className="flex flex-col items-center text-center">
