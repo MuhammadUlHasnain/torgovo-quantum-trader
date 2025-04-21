@@ -1,19 +1,23 @@
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
+
 interface ComparisonFeature {
   name: string;
-  torgovo: boolean | string;
+  aiGridBot: boolean | string;
   competitor1?: boolean | string;
   competitor2?: boolean | string;
   competitor3?: boolean | string;
 }
+
 interface ComparisonTableProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   subtitle?: string;
   competitors: string[];
   features: ComparisonFeature[];
 }
+
 const ComparisonTable: React.FC<ComparisonTableProps> = ({
   title,
   subtitle,
@@ -34,41 +38,51 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
             <thead>
               <tr className="border-b">
                 <th className="p-4 text-left">Features</th>
-                <th className="p-4 text-center bg-torgovo-purple/10 text-torgovo-purple">Grid Bots</th>
-                {competitors.map((competitor, index) => <th key={index} className="p-4 text-center">{competitor}</th>)}
+                <th className="p-4 text-center bg-torgovo-purple/10 text-torgovo-purple">AI Powered Grid Bot</th>
+                {competitors.map((competitor, index) => (
+                  <th key={index} className="p-4 text-center">{competitor}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {features.map((feature, index) => <tr key={index} className="border-b last:border-b-0">
+              {features.map((feature, index) => (
+                <tr key={index} className="border-b last:border-b-0">
                   <td className="p-4">{feature.name}</td>
                   <td className="p-4 text-center bg-torgovo-purple/5">
-                    {renderValue(feature.torgovo, true)}
+                    {renderValue(feature.aiGridBot, true)}
                   </td>
                   <td className="p-4 text-center">
                     {renderValue(feature.competitor1)}
                   </td>
-                  {feature.competitor2 !== undefined && <td className="p-4 text-center">
+                  {feature.competitor2 !== undefined && (
+                    <td className="p-4 text-center">
                       {renderValue(feature.competitor2)}
-                    </td>}
-                  {feature.competitor3 !== undefined && <td className="p-4 text-center">
+                    </td>
+                  )}
+                  {feature.competitor3 !== undefined && (
+                    <td className="p-4 text-center">
                       {renderValue(feature.competitor3)}
-                    </td>}
-                </tr>)}
+                    </td>
+                  )}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
     </section>;
 };
-function renderValue(value: boolean | string | undefined, isTorgovo = false) {
+
+function renderValue(value: boolean | string | undefined, isAiGridBot = false) {
   if (value === undefined) return null;
   if (typeof value === "boolean") {
     if (value) {
-      return <Check className={`h-5 w-5 mx-auto ${isTorgovo ? "text-torgovo-purple" : "text-torgovo-blue"}`} />;
+      return <Check className={`h-5 w-5 mx-auto ${isAiGridBot ? "text-torgovo-purple" : "text-torgovo-blue"}`} />;
     } else {
       return <X className="h-5 w-5 mx-auto text-muted-foreground" />;
     }
   }
-  return <span className={isTorgovo ? "text-torgovo-purple font-medium" : ""}>{value}</span>;
+  return <span className={isAiGridBot ? "text-torgovo-purple font-medium" : ""}>{value}</span>;
 }
+
 export default ComparisonTable;

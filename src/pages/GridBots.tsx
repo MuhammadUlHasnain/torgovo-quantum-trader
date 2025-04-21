@@ -17,11 +17,11 @@ const GridBots = () => {
   return (
     <Layout>
       <HeroSection
-        heroTitle="GRID Trading Bots"
-        subtitle="Automate your trading with powerful GRID bot strategies that work in any market condition."
+        heroTitle="AI Powered Grid Bot"
+        subtitle="Automate your trading with advanced AI-powered grid strategies that work in any market condition."
       >
         <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-          Create GRID Bot
+          Create AI Powered Grid Bot
         </Button>
       </HeroSection>
       
@@ -253,7 +253,7 @@ const GridBots = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-              Create GRID Bot
+              Create AI Powered Grid Bot
             </Button>
             <Button variant="outline" className="flex items-center gap-2">
               View Tutorial <ArrowRight className="h-4 w-4" />
@@ -263,40 +263,40 @@ const GridBots = () => {
         
         <ComparisonTable
           title="Bot Type Comparison"
-          subtitle="See how Grid bots compare with other trading strategies"
+          subtitle="See how our AI Powered Grid Bot compares with other trading strategies"
           competitors={["Spot Bots", "Futures Bots", "Martingale Bots"]}
           features={[
             {
               name: "Suitable for Sideways Markets",
-              torgovo: true,
+              aiGridBot: true,
               competitor1: false,
               competitor2: true,
               competitor3: true
             },
             {
               name: "Profit from Volatility",
-              torgovo: true,
+              aiGridBot: true,
               competitor1: false,
               competitor2: true,
               competitor3: true
             },
             {
               name: "Risk Level",
-              torgovo: "Low-Medium",
+              aiGridBot: "Low-Medium",
               competitor1: "Low",
               competitor2: "High",
               competitor3: "Medium-High"
             },
             {
               name: "Capital Efficiency",
-              torgovo: "Medium",
+              aiGridBot: "Medium",
               competitor1: "Low",
               competitor2: "High",
               competitor3: "Medium"
             },
             {
               name: "Technical Knowledge Required",
-              torgovo: "Medium",
+              aiGridBot: "Medium",
               competitor1: "Low",
               competitor2: "High",
               competitor3: "Medium"

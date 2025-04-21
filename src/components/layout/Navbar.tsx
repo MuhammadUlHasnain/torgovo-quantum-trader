@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -43,10 +42,10 @@ const Navbar = () => {
                     <Link to="/grid-bots">
                       <NavigationMenuLink className={cn(navigationCardClass)}>
                         <div className="mb-2 mt-4 text-lg font-medium text-torgovo-blue">
-                          GRID Bots
+                          AI Powered Grid Bot
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Automate trading with our advanced GRID bot strategies
+                          Automate trading with our advanced AI-powered grid strategies
                         </p>
                       </NavigationMenuLink>
                     </Link>
@@ -118,7 +117,7 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="min-w-[220px] p-2">
+                <ul className="min-w-[220px] p-2 relative">
                   <li>
                     <Link to="/blog">
                       <NavigationMenuLink className={navigationDropdownItemClass}>
@@ -163,11 +162,10 @@ const Navbar = () => {
   );
 };
 
-// Shared navigation styles
 const navigationItemClass = "group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50";
 
-const navigationCardClass = "flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md";
+const navigationCardClass = "block w-full select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground";
 
-const navigationDropdownItemClass = "block w-full rounded-md px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground";
+const navigationDropdownItemClass = "relative block w-full rounded-md px-4 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground";
 
 export default Navbar;
