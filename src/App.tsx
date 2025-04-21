@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -6,6 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import GridBots from "./pages/GridBots";
+import SpotBots from "./pages/SpotBots";
+import FuturesBots from "./pages/FuturesBots";
 import MartingaleBots from "./pages/MartingaleBots";
 import Tutorial from "./pages/Tutorial";
 import Pricing from "./pages/Pricing";
@@ -37,6 +40,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/grid-bots" element={<GridBots />} />
+          <Route path="/spot-bots" element={<SpotBots />} />
+          <Route path="/futures-bots" element={<FuturesBots />} />
           <Route path="/martingale-bots" element={<MartingaleBots />} />
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/pricing" element={<Pricing />} />

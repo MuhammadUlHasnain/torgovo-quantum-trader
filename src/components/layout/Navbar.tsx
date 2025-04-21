@@ -38,7 +38,7 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Bots</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2">
                   <li>
                     <Link to="/grid-bots">
                       <NavigationMenuLink className={cn(navigationCardClass)}>
@@ -47,6 +47,30 @@ const Navbar = () => {
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
                           Automate trading with our advanced GRID bot strategies
+                        </p>
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/spot-bots">
+                      <NavigationMenuLink className={cn(navigationCardClass)}>
+                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-blue">
+                          SPOT Bots
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Automated single entry/exit spot trading with precision
+                        </p>
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/futures-bots">
+                      <NavigationMenuLink className={cn(navigationCardClass)}>
+                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-purple">
+                          FUTURES Bots
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Advanced trading with leverage for experienced traders
                         </p>
                       </NavigationMenuLink>
                     </Link>
