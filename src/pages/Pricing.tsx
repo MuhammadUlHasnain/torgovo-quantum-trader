@@ -1,10 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
 import PricingCard, { PricingTier } from "@/components/ui/pricing-card";
 import { Button } from "@/components/ui/button";
 import { Check, HelpCircle, X } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import {
   Accordion,
   AccordionContent,
@@ -12,81 +13,108 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const pricingTiers: PricingTier[] = [
-  {
-    name: "Free",
-    price: "$0",
-    description: "For beginners exploring automated trading",
-    features: [
-      "1 Active Bot",
-      "Basic Grid Strategy",
-      "Manual Trading Signals",
-      "Community Support",
-      "Basic Analytics Dashboard",
-    ],
-    buttonText: "Start Free",
-  },
-  {
-    name: "Basic",
-    price: "$29",
-    description: "For serious traders taking the next step",
-    features: [
-      "5 Active Bots",
-      "Grid & Martingale Strategies",
-      "Basic Webhook Notifications",
-      "Email Support",
-      "Standard Analytics Dashboard",
-      "API Access",
-    ],
-    buttonText: "Subscribe Now",
-  },
-  {
-    name: "Pro",
-    price: "$99",
-    description: "For professional traders and advanced strategies",
-    features: [
-      "Unlimited Active Bots",
-      "All Trading Strategies",
-      "Advanced Webhook Integrations",
-      "Priority Support",
-      "Advanced Analytics Dashboard",
-      "Custom Indicators",
-      "Multi-Exchange Support",
-      "Portfolio Rebalancing",
-    ],
-    buttonText: "Get Pro",
-    popular: true,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    description: "For institutions and high-volume traders",
-    features: [
-      "Everything in Pro Plan",
-      "Dedicated Account Manager",
-      "Custom Bot Development",
-      "24/7 Phone Support",
-      "Custom Reporting",
-      "SLA Guarantees",
-      "White Label Options",
-    ],
-    buttonText: "Contact Sales",
-  },
-];
+const annualDiscount = 0.17; // 17% discount
+
+const calculateAnnualPrice = (monthlyPrice: number) => {
+  const annualPrice = monthlyPrice * 12 * (1 - annualDiscount);
+  return Math.floor(annualPrice);
+};
 
 const Pricing = () => {
+  const [isAnnual, setIsAnnual] = useState(false);
+
+  const pricingTiers: PricingTier[] = [
+    {
+      name: "Free",
+      price: "$0",
+      description: "For beginners exploring automated trading",
+      features: [
+        "1 spot bot (basic functionality)",
+        "Trading volume up to $1,000",
+        "1 exchange connection",
+        "Community support",
+        "Basic analytics dashboard",
+        "Manual trading signals",
+      ],
+      buttonText: "Start Free",
+    },
+    {
+      name: "Basic",
+      price: isAnnual ? `$199/year` : "$19.99/month",
+      description: "For serious traders taking the next step",
+      features: [
+        "3 active bots (spot & grid)",
+        "Trading volume up to $25,000",
+        "2 exchange connections",
+        "Email support",
+        "Standard analytics dashboard",
+        "Basic webhook notifications",
+        "API access",
+        "Grid & basic martingale strategies",
+      ],
+      buttonText: "Subscribe Now",
+    },
+    {
+      name: "Pro",
+      price: isAnnual ? `$499/year` : "$49.99/month",
+      description: "For professional traders and advanced strategies",
+      features: [
+        "10 active bots (all types)",
+        "Trading volume up to $100,000",
+        "5 exchange connections",
+        "Priority email support",
+        "Advanced analytics dashboard",
+        "Advanced webhook integrations",
+        "Custom indicators",
+        "Multi-exchange support",
+        "Portfolio rebalancing",
+      ],
+      buttonText: "Get Pro",
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      description: "For institutions and high-volume traders",
+      features: [
+        "Unlimited active bots (all types)",
+        "Unlimited trading volume",
+        "Unlimited exchange connections",
+        "Dedicated account manager",
+        "24/7 phone support",
+        "Custom bot development",
+        "Custom reporting",
+        "SLA guarantees",
+        "White label options",
+      ],
+      buttonText: "Contact Sales",
+    },
+  ];
+
   return (
     <Layout>
       <HeroSection
         heroTitle="Simple, Transparent Pricing"
         subtitle="Choose the plan that fits your trading needs. All plans include our core automation features."
       >
-        <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
+        <Button className="bg-torgovo-purple hover:bg-torgovo-purple/80">
           Start Your Free Trial
         </Button>
       </HeroSection>
 
       <div className="container py-12">
+        <div className="flex justify-center items-center gap-4 mb-8">
+          <span className={!isAnnual ? "text-torgovo-purple" : "text-muted-foreground"}>Monthly</span>
+          <Switch
+            checked={isAnnual}
+            onCheckedChange={setIsAnnual}
+            className="data-[state=checked]:bg-torgovo-purple"
+          />
+          <span className={isAnnual ? "text-torgovo-purple" : "text-muted-foreground"}>
+            Annual (Save ~17%)
+          </span>
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {pricingTiers.map((tier) => (
             <PricingCard key={tier.name} tier={tier} />
@@ -109,66 +137,38 @@ const Pricing = () => {
               <tbody>
                 <tr className="border-b">
                   <td className="p-4">Active Bots</td>
+                  <td className="p-4 text-center">1 Spot</td>
+                  <td className="p-4 text-center">3 Total</td>
+                  <td className="p-4 text-center">10 Total</td>
+                  <td className="p-4 text-center">Unlimited</td>
+                </tr>
+                <tr className="border-b">
+                  <td className="p-4">Trading Volume Limit</td>
+                  <td className="p-4 text-center">$1,000</td>
+                  <td className="p-4 text-center">$25,000</td>
+                  <td className="p-4 text-center">$100,000</td>
+                  <td className="p-4 text-center">Unlimited</td>
+                </tr>
+                <tr className="border-b">
+                  <td className="p-4">Exchange Connections</td>
                   <td className="p-4 text-center">1</td>
+                  <td className="p-4 text-center">2</td>
                   <td className="p-4 text-center">5</td>
                   <td className="p-4 text-center">Unlimited</td>
-                  <td className="p-4 text-center">Unlimited</td>
                 </tr>
                 <tr className="border-b">
-                  <td className="p-4">Grid Bots</td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">Martingale Bots</td>
-                  <td className="p-4 text-center"><X className="h-5 w-5 mx-auto text-muted-foreground" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">Custom Strategies</td>
-                  <td className="p-4 text-center"><X className="h-5 w-5 mx-auto text-muted-foreground" /></td>
-                  <td className="p-4 text-center"><X className="h-5 w-5 mx-auto text-muted-foreground" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">Webhook Notifications</td>
-                  <td className="p-4 text-center"><X className="h-5 w-5 mx-auto text-muted-foreground" /></td>
-                  <td className="p-4 text-center">Basic</td>
-                  <td className="p-4 text-center">Advanced</td>
-                  <td className="p-4 text-center">Custom</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">Analytics Dashboard</td>
-                  <td className="p-4 text-center">Basic</td>
-                  <td className="p-4 text-center">Standard</td>
-                  <td className="p-4 text-center">Advanced</td>
-                  <td className="p-4 text-center">Custom</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">Supported Exchanges</td>
-                  <td className="p-4 text-center">Binance</td>
-                  <td className="p-4 text-center">Binance, Bybit</td>
-                  <td className="p-4 text-center">All Major Exchanges</td>
-                  <td className="p-4 text-center">All + Custom</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">API Access</td>
-                  <td className="p-4 text-center"><X className="h-5 w-5 mx-auto text-muted-foreground" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                  <td className="p-4 text-center"><Check className="h-5 w-5 mx-auto text-torgovo-blue" /></td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">Support</td>
+                  <td className="p-4">Support Level</td>
                   <td className="p-4 text-center">Community</td>
                   <td className="p-4 text-center">Email</td>
-                  <td className="p-4 text-center">Priority</td>
-                  <td className="p-4 text-center">Dedicated</td>
+                  <td className="p-4 text-center">Priority Email</td>
+                  <td className="p-4 text-center">24/7 Phone</td>
+                </tr>
+                <tr className="border-b">
+                  <td className="p-4">Bot Types</td>
+                  <td className="p-4 text-center">Basic Spot</td>
+                  <td className="p-4 text-center">Spot & Grid</td>
+                  <td className="p-4 text-center">All Types</td>
+                  <td className="p-4 text-center">All + Custom</td>
                 </tr>
               </tbody>
             </table>
@@ -180,63 +180,44 @@ const Pricing = () => {
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger>Can I switch plans later?</AccordionTrigger>
+                <AccordionTrigger>Can I upgrade or downgrade my plan?</AccordionTrigger>
                 <AccordionContent>
-                  Yes, you can upgrade or downgrade your plan at any time. When you upgrade, you'll be 
-                  charged the prorated amount for the remainder of your billing cycle. When 
-                  downgrading, the new rate will apply at the start of your next billing cycle.
+                  Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be
+                  charged the prorated amount for the remainder of your billing cycle. When downgrading,
+                  the new rate will apply at the start of your next billing cycle.
                 </AccordionContent>
               </AccordionItem>
-              
+
               <AccordionItem value="item-2">
-                <AccordionTrigger>Do you offer refunds?</AccordionTrigger>
+                <AccordionTrigger>Are there any additional fees?</AccordionTrigger>
                 <AccordionContent>
-                  We offer a 14-day money-back guarantee for all new subscriptions. If you're not 
-                  satisfied with our service, contact our support team within 14 days of your 
-                  initial purchase for a full refund.
+                  No, there are no hidden fees. The price you see is the price you pay. However,
+                  please note that exchanges may charge their own trading fees, which are separate
+                  from our platform fees.
                 </AccordionContent>
               </AccordionItem>
-              
+
               <AccordionItem value="item-3">
-                <AccordionTrigger>What payment methods do you accept?</AccordionTrigger>
+                <AccordionTrigger>What happens if I exceed my trading volume?</AccordionTrigger>
                 <AccordionContent>
-                  We accept all major credit cards (Visa, Mastercard, American Express), PayPal, 
-                  and cryptocurrency payments (Bitcoin, Ethereum, and USDT).
+                  If you approach your trading volume limit, we'll notify you in advance. To continue
+                  trading beyond your limit, you'll need to upgrade to a higher tier plan. We never
+                  automatically charge extra fees for exceeding limits.
                 </AccordionContent>
               </AccordionItem>
-              
+
               <AccordionItem value="item-4">
-                <AccordionTrigger>Are there any hidden fees?</AccordionTrigger>
+                <AccordionTrigger>How is trading volume calculated?</AccordionTrigger>
                 <AccordionContent>
-                  No, there are no hidden fees. The price you see is the price you pay. We don't 
-                  charge any additional fees for using our platform or connecting to exchanges. 
-                  However, please note that exchanges may charge their own trading fees.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-5">
-                <AccordionTrigger>What is the difference between Grid and Martingale bots?</AccordionTrigger>
-                <AccordionContent>
-                  Grid bots place buy and sell orders at regular intervals within a predetermined 
-                  price range, making them ideal for sideways markets. Martingale bots use a 
-                  cost-averaging strategy that increases position size after losses to lower average 
-                  entry price. Grid bots are available on all plans, while Martingale bots are 
-                  available on Basic plans and above.
-                </AccordionContent>
-              </AccordionItem>
-              
-              <AccordionItem value="item-6">
-                <AccordionTrigger>Can I cancel my subscription anytime?</AccordionTrigger>
-                <AccordionContent>
-                  Yes, you can cancel your subscription at any time from your account settings. 
-                  After cancellation, your plan will remain active until the end of your current 
-                  billing period.
+                  Trading volume is calculated on a monthly basis as the total value of all trades
+                  executed through our platform, including both buy and sell orders. The volume resets
+                  at the beginning of each month.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
           </div>
         </div>
-        
+
         <div className="mt-16 text-center">
           <div className="glass-card p-8 max-w-3xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">Need a Custom Solution?</h2>
