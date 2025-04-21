@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
@@ -9,6 +8,7 @@ import FeatureSection from "@/components/ui/feature-section";
 import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import FuturesTradingVisual from "@/components/trading/FuturesTradingVisual";
+import ComparisonTable from "@/components/ui/ComparisonTable";
 
 const FuturesBots = () => {
   return (
@@ -280,6 +280,50 @@ const FuturesBots = () => {
             </div>
           </div>
         </div>
+        
+        <ComparisonTable
+          title="Bot Type Comparison"
+          subtitle="See how our Futures Bot compares with other trading strategies"
+          competitors={["Spot Bots", "Martingale Bots", "AI Powered Grid Bot"]}
+          features={[
+            {
+              name: "Leverage Trading",
+              aiGridBot: true,
+              competitor1: false,
+              competitor2: true,
+              competitor3: false
+            },
+            {
+              name: "Capital Efficiency",
+              aiGridBot: "High",
+              competitor1: "Low",
+              competitor2: "Medium",
+              competitor3: "Medium"
+            },
+            {
+              name: "Risk Level",
+              aiGridBot: "High",
+              competitor1: "Low",
+              competitor2: "Medium-High",
+              competitor3: "Low-Medium"
+            },
+            {
+              name: "Profit Potential",
+              aiGridBot: "Very High",
+              competitor1: "Medium",
+              competitor2: "High",
+              competitor3: "Medium"
+            },
+            {
+              name: "Market Adaptability",
+              aiGridBot: "High",
+              competitor1: "Medium",
+              competitor2: "Low",
+              competitor3: "High"
+            }
+          ]}
+          className="mt-16"
+        />
         
         <BotFaqSection 
           title="Frequently Asked Questions About Futures Bots"

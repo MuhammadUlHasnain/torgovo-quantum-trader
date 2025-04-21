@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
@@ -6,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertCircle, ArrowRight, Check } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
+import ComparisonTable from "@/components/ui/comparison-table";
 
 const MartingaleBots = () => {
   return (
@@ -182,6 +182,50 @@ const MartingaleBots = () => {
               description: "Set limits on how many safety orders can be placed to control risk exposure."
             },
           ]}
+        />
+        
+        <ComparisonTable
+          title="Bot Type Comparison"
+          subtitle="See how our Martingale Bot compares with other trading strategies"
+          competitors={["Spot Bots", "Futures Bots", "AI Powered Grid Bot"]}
+          features={[
+            {
+              name: "Risk Management",
+              aiGridBot: "Medium",
+              competitor1: "Low",
+              competitor2: "High",
+              competitor3: "Medium"
+            },
+            {
+              name: "Profit Recovery",
+              aiGridBot: true,
+              competitor1: false,
+              competitor2: false,
+              competitor3: true
+            },
+            {
+              name: "Market Condition",
+              aiGridBot: "Trending",
+              competitor1: "Any",
+              competitor2: "Any",
+              competitor3: "Ranging"
+            },
+            {
+              name: "Capital Efficiency",
+              aiGridBot: "High",
+              competitor1: "Low",
+              competitor2: "High",
+              competitor3: "Medium"
+            },
+            {
+              name: "Technical Knowledge Required",
+              aiGridBot: "High",
+              competitor1: "Low",
+              competitor2: "High",
+              competitor3: "Medium"
+            }
+          ]}
+          className="mt-16"
         />
         
         <div className="mt-12 text-center">

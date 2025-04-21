@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
@@ -9,6 +8,7 @@ import FeatureSection from "@/components/ui/feature-section";
 import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import SpotTradingVisual from "@/components/trading/SpotTradingVisual";
+import ComparisonTable from "@/components/ui/comparison-table";
 
 const SpotBots = () => {
   return (
@@ -203,6 +203,50 @@ const SpotBots = () => {
             ))}
           </div>
         </div>
+        
+        <ComparisonTable
+          title="Bot Type Comparison"
+          subtitle="See how our Spot Bot compares with other trading strategies"
+          competitors={["Futures Bots", "Martingale Bots", "AI Powered Grid Bot"]}
+          features={[
+            {
+              name: "Risk Level",
+              aiGridBot: "Low",
+              competitor1: "High",
+              competitor2: "Medium-High",
+              competitor3: "Low-Medium"
+            },
+            {
+              name: "Capital Required",
+              aiGridBot: "Low",
+              competitor1: "Medium",
+              competitor2: "High",
+              competitor3: "Medium"
+            },
+            {
+              name: "Leverage Available",
+              aiGridBot: false,
+              competitor1: true,
+              competitor2: true,
+              competitor3: false
+            },
+            {
+              name: "Beginner Friendly",
+              aiGridBot: true,
+              competitor1: false,
+              competitor2: false,
+              competitor3: true
+            },
+            {
+              name: "Market Adaptability",
+              aiGridBot: "High",
+              competitor1: "Medium",
+              competitor2: "Low",
+              competitor3: "Medium"
+            }
+          ]}
+          className="mt-16"
+        />
         
         <BotFaqSection 
           title="Frequently Asked Questions About Spot Bots"
