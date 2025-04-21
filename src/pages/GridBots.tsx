@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
@@ -206,17 +205,17 @@ const GridBots = () => {
           title="What Traders Say About Our Grid Bots"
           testimonials={[
             {
-              quote: "I've tried several grid bots, but Torgovo's implementation is by far the most intuitive and profitable. The custom parameters give me exactly the control I need.",
+              content: "I've tried several grid bots, but Torgovo's implementation is by far the most intuitive and profitable. The custom parameters give me exactly the control I need.",
               author: "Michael K.",
               role: "Day Trader, 3 years"
             },
             {
-              quote: "The grid strategy has transformed my crypto trading. Even in sideways markets, I'm consistently making 5-8% monthly without having to watch charts all day.",
+              content: "The grid strategy has transformed my crypto trading. Even in sideways markets, I'm consistently making 5-8% monthly without having to watch charts all day.",
               author: "Sarah L.",
               role: "Part-time Trader"
             },
             {
-              quote: "As an institution, we need reliable automation. Torgovo's grid bots have been running flawlessly for over a year, generating steady returns for our clients.",
+              content: "As an institution, we need reliable automation. Torgovo's grid bots have been running flawlessly for over a year, generating steady returns for our clients.",
               author: "David M.",
               role: "Portfolio Manager"
             }

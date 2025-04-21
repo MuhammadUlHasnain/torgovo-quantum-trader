@@ -5,11 +5,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 
 interface Testimonial {
-  name: string;
+  name?: string;
+  author?: string;
   position?: string;
   company?: string;
-  content: string;
+  content?: string;
+  quote?: string;
   rating?: number;
+  role?: string;
 }
 
 interface TestimonialSectionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -69,19 +72,21 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
                 )}
                 
                 <blockquote className="mb-4">
-                  <p className="text-muted-foreground italic">"{testimonial.content}"</p>
+                  <p className="text-muted-foreground italic">{testimonial.content || testimonial.quote ? `"${testimonial.content || testimonial.quote}"` : ""}</p>
                 </blockquote>
                 
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                    <span className="text-sm font-medium">{testimonial.name.charAt(0)}</span>
+                    <span className="text-sm font-medium">
+                      {testimonial.name ? testimonial.name.charAt(0) : testimonial.author ? testimonial.author.charAt(0) : ""}
+                    </span>
                   </div>
                   <div>
-                    <p className="font-medium">{testimonial.name}</p>
-                    {(testimonial.position || testimonial.company) && (
+                    <p className="font-medium">{testimonial.name || testimonial.author}</p>
+                    {((testimonial.position || testimonial.role) || testimonial.company) && (
                       <p className="text-xs text-muted-foreground">
-                        {testimonial.position}
-                        {testimonial.position && testimonial.company && ", "}
+                        {testimonial.position || testimonial.role}
+                        {(testimonial.position || testimonial.role) && testimonial.company && ", "}
                         {testimonial.company}
                       </p>
                     )}
