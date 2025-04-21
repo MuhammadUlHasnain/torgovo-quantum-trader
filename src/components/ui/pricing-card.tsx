@@ -23,7 +23,7 @@ const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
       <div
         ref={ref}
         className={cn(
-          "relative flex flex-col overflow-hidden rounded-lg border",
+          "relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/30",
           tier.popular
             ? "border-torgovo-purple glow-border scale-[1.02] z-10"
             : "border-border",
@@ -40,9 +40,9 @@ const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
         )}
 
         <div className="p-6">
-          <h3 className="text-2xl font-bold">{tier.name}</h3>
+          <h3 className="text-xl font-bold">{tier.name}</h3>
           <div className="mt-4 flex items-baseline text-foreground">
-            <span className="text-4xl font-extrabold tracking-tight">
+            <span className="text-3xl font-extrabold tracking-tight">
               {tier.price}
             </span>
             {tier.price !== "Custom" && (
@@ -57,21 +57,23 @@ const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
         </div>
 
         <div className="flex flex-1 flex-col justify-between border-t p-6">
-          <ul className="space-y-3">
+          <ul className="space-y-4">
             {tier.features.map((feature, index) => (
               <li key={index} className="flex items-start">
-                <Check className="mr-2 h-5 w-5 shrink-0 text-torgovo-blue" />
-                <span className="text-sm text-muted-foreground">{feature}</span>
+                <Check className="mr-3 h-5 w-5 shrink-0 text-torgovo-purple" />
+                <span className="text-sm text-muted-foreground leading-tight">
+                  {feature}
+                </span>
               </li>
             ))}
           </ul>
 
-          <div className="mt-6">
+          <div className="mt-8">
             <Button
               className={cn(
                 "w-full",
                 tier.popular
-                  ? "bg-torgovo-purple hover:bg-torgovo-purple-dim"
+                  ? "bg-torgovo-purple hover:bg-torgovo-purple/80"
                   : ""
               )}
               variant={tier.popular ? "default" : "outline"}
