@@ -29,7 +29,6 @@ import {
 } from "@/components/ui/tabs";
 import { LineChart } from "lucide-react";
 
-// Mock data for bot management
 const botData = [
   {
     id: "bot-1",
@@ -133,21 +132,17 @@ const BotManagement = () => {
   const [sortOrder, setSortOrder] = useState("desc");
   const [selectedBot, setSelectedBot] = useState<string | null>(null);
 
-  // Filter and sort bots
   const filteredBots = botData
     .filter((bot) => {
-      // Apply search
       if (searchTerm && !bot.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
           !bot.pair.toLowerCase().includes(searchTerm.toLowerCase())) {
         return false;
       }
       
-      // Apply type filter
       if (filterType !== "all" && bot.type !== filterType) {
         return false;
       }
       
-      // Apply status filter
       if (filterStatus !== "all" && bot.status !== filterStatus) {
         return false;
       }
@@ -155,7 +150,6 @@ const BotManagement = () => {
       return true;
     })
     .sort((a, b) => {
-      // Apply sorting
       let comparison = 0;
       
       switch (sortBy) {
@@ -178,7 +172,6 @@ const BotManagement = () => {
       return sortOrder === "asc" ? comparison : -comparison;
     });
 
-  // Get selected bot details
   const selectedBotDetails = selectedBot
     ? botData.find(bot => bot.id === selectedBot)
     : null;
@@ -193,7 +186,6 @@ const BotManagement = () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        {/* Filter and Search Controls */}
         <Card>
           <CardContent className="p-4">
             <div className="grid gap-4 md:grid-cols-4">
@@ -271,9 +263,7 @@ const BotManagement = () => {
           </CardContent>
         </Card>
         
-        {/* Bots List and Detail View */}
         <div className="grid gap-6 lg:grid-cols-3">
-          {/* Bot List */}
           <Card className="lg:col-span-1">
             <CardHeader>
               <CardTitle className="text-xl">
@@ -334,15 +324,14 @@ const BotManagement = () => {
             </CardContent>
           </Card>
           
-          {/* Bot Details */}
           <Card className="lg:col-span-2">
             {selectedBotDetails ? (
               <>
                 <CardHeader>
-                  <div className="flex justify-between items-start">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div>
-                      <CardTitle className="text-xl">{selectedBotDetails.name}</CardTitle>
-                      <CardDescription>
+                      <CardTitle className="text-2xl">{selectedBotDetails.name}</CardTitle>
+                      <CardDescription className="mt-1">
                         {selectedBotDetails.type} Bot • {selectedBotDetails.exchange} • {selectedBotDetails.pair}
                       </CardDescription>
                     </div>
@@ -375,72 +364,61 @@ const BotManagement = () => {
                     </TabsList>
                     
                     <TabsContent value="overview">
-                      <div className="grid gap-6 md:grid-cols-2">
-                        {/* Bot Stats */}
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-1">
-                              <p className="text-sm text-muted-foreground">Total Profit</p>
-                              <p className={`text-xl font-semibold ${
-                                selectedBotDetails.profit >= 0 ? "text-green-500" : "text-red-500"
-                              }`}>
-                                ${selectedBotDetails.profit.toFixed(2)}
-                                <span className="text-sm ml-1">
-                                  ({selectedBotDetails.profitPercent}%)
-                                </span>
-                              </p>
-                            </div>
-                            
-                            <div className="space-y-1">
-                              <p className="text-sm text-muted-foreground">Total Trades</p>
-                              <p className="text-xl font-semibold">
-                                {selectedBotDetails.trades}
-                              </p>
-                            </div>
-                            
-                            <div className="space-y-1">
-                              <p className="text-sm text-muted-foreground">Date Created</p>
-                              <p className="text-sm">
-                                {new Date(selectedBotDetails.created).toLocaleDateString()}
-                              </p>
-                            </div>
-                            
-                            <div className="space-y-1">
-                              <p className="text-sm text-muted-foreground">Status</p>
-                              <div className="flex items-center">
-                                <div className={`mr-2 h-2 w-2 rounded-full ${
-                                  selectedBotDetails.status === "active" ? "bg-green-500" : "bg-yellow-500"
-                                }`} />
-                                <span className="capitalize">{selectedBotDetails.status}</span>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="p-4 rounded-md bg-muted/20">
-                            <h3 className="text-sm font-medium mb-2">Bot Description</h3>
-                            <p className="text-sm text-muted-foreground">
-                              {selectedBotDetails.type === "GRID" ? (
-                                <span>
-                                  This Grid bot trades {selectedBotDetails.pair} on {selectedBotDetails.exchange} with 
-                                  {selectedBotDetails.settings.gridLines} grid lines between 
-                                  ${selectedBotDetails.settings.lowerLimit} and ${selectedBotDetails.settings.upperLimit}.
-                                </span>
-                              ) : (
-                                <span>
-                                  This Martingale bot trades {selectedBotDetails.pair} on {selectedBotDetails.exchange} with 
-                                  an initial order size of {selectedBotDetails.settings.initialOrderSize} and up to 
-                                  {selectedBotDetails.settings.maxSafetyOrders} safety orders.
-                                </span>
-                              )}
-                            </p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+                        <div>
+                          <p className="text-sm text-muted-foreground">Total Profit</p>
+                          <p className={`text-2xl font-semibold ${
+                            selectedBotDetails.profit >= 0 ? "text-green-500" : "text-red-500"
+                          }`}>
+                            ${selectedBotDetails.profit.toFixed(2)}
+                            <span className="text-base ml-1 font-normal text-muted-foreground">
+                              ({selectedBotDetails.profitPercent}%)
+                            </span>
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Total Trades</p>
+                          <p className="text-2xl font-semibold">
+                            {selectedBotDetails.trades}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Date Created</p>
+                          <p className="text-base font-medium">
+                            {new Date(selectedBotDetails.created).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Status</p>
+                          <div className="flex items-center mt-1">
+                            <div className={`mr-2 h-2 w-2 rounded-full ${
+                              selectedBotDetails.status === "active" ? "bg-green-500" : "bg-yellow-500"
+                            }`} />
+                            <span className="capitalize font-medium">{selectedBotDetails.status}</span>
                           </div>
                         </div>
-                        
-                        {/* Performance Chart Placeholder */}
-                        <div className="bg-muted/20 rounded-md border border-border h-[200px] flex items-center justify-center">
-                          <LineChart className="h-10 w-10 text-muted-foreground/50" />
-                          <span className="ml-2 text-muted-foreground">Performance Chart</span>
-                        </div>
+                      </div>
+                      <div className="p-5 mb-6 rounded-md bg-muted/20 border border-border">
+                        <h3 className="text-base font-semibold mb-1">Bot Description</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {selectedBotDetails.type === "GRID" ? (
+                            <span>
+                              This Grid bot trades {selectedBotDetails.pair} on {selectedBotDetails.exchange} with 
+                              {` ${selectedBotDetails.settings.gridLines} `}grid lines between 
+                              ${selectedBotDetails.settings.lowerLimit} and ${selectedBotDetails.settings.upperLimit}.
+                            </span>
+                          ) : (
+                            <span>
+                              This Martingale bot trades {selectedBotDetails.pair} on {selectedBotDetails.exchange} with 
+                              an initial order size of {selectedBotDetails.settings.initialOrderSize} and up to 
+                              {selectedBotDetails.settings.maxSafetyOrders} safety orders.
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <div className="w-full bg-muted/20 rounded-md border border-border flex flex-col items-center justify-center py-8 min-h-[220px]">
+                        <LineChart className="h-10 w-10 text-muted-foreground/50" />
+                        <span className="mt-2 text-muted-foreground text-sm">Performance Chart</span>
                       </div>
                     </TabsContent>
                     
@@ -450,7 +428,6 @@ const BotManagement = () => {
                           <LineChart className="h-12 w-12 text-muted-foreground/50" />
                           <span className="ml-2 text-muted-foreground">Detailed Performance Charts</span>
                         </div>
-                        
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                           <div className="p-4 bg-muted/30 rounded-md">
                             <p className="text-sm text-muted-foreground">Win Rate</p>
@@ -478,9 +455,7 @@ const BotManagement = () => {
                           <Settings className="mr-2 h-4 w-4" />
                           Edit Settings
                         </Button>
-                        
                         <h3 className="text-lg font-medium">Bot Configuration</h3>
-                        
                         {selectedBotDetails.type === "GRID" ? (
                           <div className="grid md:grid-cols-2 gap-4">
                             <div className="p-4 rounded-md bg-muted/20">
@@ -504,7 +479,6 @@ const BotManagement = () => {
                                 </li>
                               </ul>
                             </div>
-                            
                             <div className="p-4 rounded-md bg-muted/20">
                               <h4 className="text-sm font-medium mb-2">Advanced Settings</h4>
                               <ul className="space-y-2">
@@ -550,7 +524,6 @@ const BotManagement = () => {
                                 </li>
                               </ul>
                             </div>
-                            
                             <div className="p-4 rounded-md bg-muted/20">
                               <h4 className="text-sm font-medium mb-2">Advanced Settings</h4>
                               <ul className="space-y-2">
@@ -578,40 +551,39 @@ const BotManagement = () => {
                     </TabsContent>
                     
                     <TabsContent value="history">
-                      <div className="rounded-md border">
+                      <div className="rounded-md border bg-muted/10 p-2 md:p-4">
                         <div className="relative w-full overflow-auto">
-                          <table className="w-full caption-bottom text-sm">
+                          <table className="w-full table-auto text-sm">
                             <thead>
                               <tr className="border-b bg-muted/40">
-                                <th className="h-10 px-4 text-left font-medium">Date & Time</th>
-                                <th className="h-10 px-4 text-left font-medium">Type</th>
-                                <th className="h-10 px-4 text-left font-medium">Price</th>
-                                <th className="h-10 px-4 text-left font-medium">Quantity</th>
-                                <th className="h-10 px-4 text-left font-medium">Profit</th>
+                                <th className="h-12 px-4 text-left font-medium">Date & Time</th>
+                                <th className="h-12 px-4 text-left font-medium">Type</th>
+                                <th className="h-12 px-4 text-right font-medium">Price</th>
+                                <th className="h-12 px-5 text-right font-medium w-40">Quantity</th>
+                                <th className="h-12 px-4 text-right font-medium">Profit</th>
                               </tr>
                             </thead>
                             <tbody>
-                              {/* This would be populated with actual trade history */}
-                              <tr className="border-b transition-colors hover:bg-muted/50">
-                                <td className="p-2 align-middle">2024-03-15 14:23:10</td>
-                                <td className="p-2 align-middle text-green-500">BUY</td>
-                                <td className="p-2 align-middle">$58,432.10</td>
-                                <td className="p-2 align-middle">0.0025 BTC</td>
-                                <td className="p-2 align-middle">-</td>
+                              <tr className="border-b transition-colors hover:bg-muted/30 even:bg-muted/15">
+                                <td className="p-3 align-middle text-left">2024-03-15 14:23:10</td>
+                                <td className="p-3 align-middle text-green-500 font-semibold text-left">BUY</td>
+                                <td className="p-3 align-middle text-right">$58,432.10</td>
+                                <td className="p-3 align-middle text-right w-40">0.0025 BTC</td>
+                                <td className="p-3 align-middle text-right text-muted-foreground">-</td>
                               </tr>
-                              <tr className="border-b transition-colors hover:bg-muted/50">
-                                <td className="p-2 align-middle">2024-03-15 16:45:22</td>
-                                <td className="p-2 align-middle text-red-500">SELL</td>
-                                <td className="p-2 align-middle">$59,103.45</td>
-                                <td className="p-2 align-middle">0.0025 BTC</td>
-                                <td className="p-2 align-middle text-green-500">$1.68</td>
+                              <tr className="border-b transition-colors hover:bg-muted/30 even:bg-muted/15">
+                                <td className="p-3 align-middle text-left">2024-03-15 16:45:22</td>
+                                <td className="p-3 align-middle text-red-500 font-semibold text-left">SELL</td>
+                                <td className="p-3 align-middle text-right">$59,103.45</td>
+                                <td className="p-3 align-middle text-right w-40">0.0025 BTC</td>
+                                <td className="p-3 align-middle text-right text-green-500 font-semibold">$1.68</td>
                               </tr>
-                              <tr className="border-b transition-colors hover:bg-muted/50">
-                                <td className="p-2 align-middle">2024-03-15 18:12:05</td>
-                                <td className="p-2 align-middle text-green-500">BUY</td>
-                                <td className="p-2 align-middle">$58,750.30</td>
-                                <td className="p-2 align-middle">0.0025 BTC</td>
-                                <td className="p-2 align-middle">-</td>
+                              <tr className="border-b transition-colors hover:bg-muted/30 even:bg-muted/15">
+                                <td className="p-3 align-middle text-left">2024-03-15 18:12:05</td>
+                                <td className="p-3 align-middle text-green-500 font-semibold text-left">BUY</td>
+                                <td className="p-3 align-middle text-right">$58,750.30</td>
+                                <td className="p-3 align-middle text-right w-40">0.0025 BTC</td>
+                                <td className="p-3 align-middle text-right text-muted-foreground">-</td>
                               </tr>
                             </tbody>
                           </table>
