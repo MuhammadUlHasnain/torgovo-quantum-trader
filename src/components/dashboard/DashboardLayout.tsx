@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import {
@@ -43,35 +42,34 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// Custom Sidebar Toggle placed outside the sidebar
 function FloatingSidebarToggle() {
   const { state, toggleSidebar } = useSidebar();
-  // Expand if collapsed, collapse if expanded
   const isCollapsed = state === "collapsed";
   return (
     <button
       aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       onClick={toggleSidebar}
       className={`
-        fixed z-50 top-5 left-5
-        md:absolute md:z-30 md:top-5 md:left-5
+        absolute left-0 top-1/2 -translate-y-1/2
+        md:left-0 md:top-1/2 md:-translate-y-1/2
         bg-torgovo-purple hover:bg-torgovo-blue
         text-white rounded-full shadow-lg
         flex items-center justify-center
         transition-colors
-        w-10 h-10
+        w-8 h-8
         border border-white/10
         focus:outline-none focus:ring-2 focus:ring-torgovo-blue
+        z-30
       `}
       style={{
-        // To ensure visibility above everything else
-        boxShadow: "0 4px 24px 0 rgba(50,50,80,0.2)",
+        marginLeft: '16px',
+        boxShadow: "0 4px 24px 0 rgba(50,50,80,0.18)",
       }}
     >
       {isCollapsed ? (
-        <ChevronsRight size={24} />
+        <ChevronsRight size={18} />
       ) : (
-        <ChevronsLeft size={24} />
+        <ChevronsLeft size={18} />
       )}
     </button>
   );
@@ -91,7 +89,6 @@ const DashboardLayout = () => {
               </div>
               <div className="font-semibold text-lg tracking-tight">Torgovo</div>
             </div>
-            {/* Removed SidebarTrigger button from header */}
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
@@ -189,11 +186,8 @@ const DashboardLayout = () => {
             <div className="flex items-center gap-4 p-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative size-8 rounded-full">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage src="https://github.com/shadcn.png" alt="User" className="rounded-full" />
-                      <AvatarFallback className="rounded-full bg-muted">JD</AvatarFallback>
-                    </Avatar>
+                  <Button variant="ghost" className="relative size-8 rounded-full bg-torgovo-blue flex items-center justify-center">
+                    <User className="h-5 w-5 text-white" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -259,8 +253,12 @@ const DashboardLayout = () => {
           </SidebarFooter>
         </Sidebar>
         <SidebarInset>
-          {/* Floating toggle button, always visible */}
-          <FloatingSidebarToggle />
+          <div className="relative w-full">
+            <FloatingSidebarToggle />
+            <div className="flex items-center pl-14 pt-2 pb-2">
+              <span className="text-xl font-semibold text-white">Management</span>
+            </div>
+          </div>
           <div className="flex-1 p-4 md:p-6 relative z-0">
             <Outlet />
           </div>
@@ -271,5 +269,3 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
-
-// ... end of file
