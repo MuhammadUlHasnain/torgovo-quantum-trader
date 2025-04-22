@@ -191,7 +191,7 @@ const MartingaleBots = () => {
           features={[
             {
               name: "Risk Management",
-              aiGridBot: "Medium",
+              aiGridBot: "Medium-High",
               competitor1: "Low",
               competitor2: "High",
               competitor3: "Medium"
@@ -225,7 +225,7 @@ const MartingaleBots = () => {
               competitor3: "Medium"
             }
           ]}
-          className="mt-16"
+          className="mt-16 container mb-12"
         />
         
         <div className="mt-12 text-center">

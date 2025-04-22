@@ -3,7 +3,7 @@ import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
 import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
@@ -15,10 +15,10 @@ const SpotBots = () => {
     <Layout>
       <HeroSection
         heroTitle="SPOT Trading Bots"
-        subtitle="Automate your spot trading with intelligent bots that execute precision trades based on your strategy."
+        subtitle="Automated bots that trade spot markets with precision and efficiency."
       >
         <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-          Create SPOT Bot
+          Create Spot Bot
         </Button>
       </HeroSection>
       
@@ -217,35 +217,35 @@ const SpotBots = () => {
               competitor3: "Low-Medium"
             },
             {
-              name: "Capital Required",
+              name: "Capital Efficiency",
               aiGridBot: "Low",
-              competitor1: "Medium",
-              competitor2: "High",
+              competitor1: "High",
+              competitor2: "Medium",
               competitor3: "Medium"
             },
             {
-              name: "Leverage Available",
+              name: "Profit from Volatility",
               aiGridBot: false,
               competitor1: true,
               competitor2: true,
-              competitor3: false
-            },
-            {
-              name: "Beginner Friendly",
-              aiGridBot: true,
-              competitor1: false,
-              competitor2: false,
               competitor3: true
             },
             {
-              name: "Market Adaptability",
-              aiGridBot: "High",
-              competitor1: "Medium",
-              competitor2: "Low",
+              name: "Suitable for Sideways Markets",
+              aiGridBot: false,
+              competitor1: false,
+              competitor2: true,
+              competitor3: true
+            },
+            {
+              name: "Technical Knowledge Required",
+              aiGridBot: "Low",
+              competitor1: "High",
+              competitor2: "Medium",
               competitor3: "Medium"
             }
           ]}
-          className="mt-16"
+          className="mt-16 container mb-12"
         />
         
         <BotFaqSection 
@@ -278,7 +278,7 @@ const SpotBots = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-              Create SPOT Bot
+              Create Spot Bot
             </Button>
             <Button variant="outline" className="flex items-center gap-2">
               View Tutorial <ArrowRight className="h-4 w-4" />

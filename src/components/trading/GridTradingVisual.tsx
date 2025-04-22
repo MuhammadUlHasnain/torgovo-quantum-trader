@@ -17,23 +17,10 @@ const GridTradingVisual = () => {
           <div 
             key={`sell-${index}`}
             className="absolute left-0 w-full border-t border-torgovo-purple/40" 
-            style={{ top: `${10 + index * 12}%` }}
+            style={{ top: `${10 + index * 8}%` }}
           >
             <div className="absolute left-2 -top-3 text-xs text-torgovo-purple">
-              Sell ${(45500 + index * 1000).toLocaleString()}
-            </div>
-          </div>
-        ))}
-        
-        {/* Buy orders - Below current price */}
-        {[0, 1, 2, 3, 4].map((index) => (
-          <div 
-            key={`buy-${index}`}
-            className="absolute left-0 w-full border-t border-torgovo-blue/40" 
-            style={{ bottom: `${10 + index * 12}%` }}
-          >
-            <div className="absolute left-2 -top-3 text-xs text-torgovo-blue">
-              Buy ${(44500 - index * 1000).toLocaleString()}
+              Sell ${(45000 + (index + 1) * 1000).toLocaleString()}
             </div>
           </div>
         ))}
@@ -44,6 +31,19 @@ const GridTradingVisual = () => {
             Current: $45,000
           </div>
         </div>
+        
+        {/* Buy orders - Below current price */}
+        {[0, 1, 2, 3, 4].map((index) => (
+          <div 
+            key={`buy-${index}`}
+            className="absolute left-0 w-full border-t border-torgovo-blue/40" 
+            style={{ bottom: `${10 + index * 8}%` }}
+          >
+            <div className="absolute left-2 -top-3 text-xs text-torgovo-blue">
+              Buy ${(45000 - (index + 1) * 1000).toLocaleString()}
+            </div>
+          </div>
+        ))}
       </div>
       <p className="text-sm text-muted-foreground mt-4 text-center">
         Grid bots place sell orders above the current price and buy orders below it, 
