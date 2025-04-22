@@ -1,38 +1,81 @@
 
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { 
-  SidebarProvider, 
-  Sidebar, 
-  SidebarHeader, 
-  SidebarContent, 
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
   SidebarGroup,
-  SidebarGroupLabel, 
-  SidebarMenu, 
-  SidebarMenuItem, 
-  SidebarMenuButton, 
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
   SidebarFooter,
-  SidebarTrigger,
-  SidebarInset
+  SidebarInset,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { 
-  Home, 
-  Bot, 
-  PlusCircle, 
-  LineChart, 
-  Settings, 
+import {
+  Home,
+  Bot,
+  PlusCircle,
+  LineChart,
+  Settings,
   HelpCircle,
   LogOut,
   Database,
   Bell,
   User,
-  Search
+  Search,
+  ChevronsLeft,
+  ChevronsRight,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+// Custom Sidebar Toggle placed outside the sidebar
+function FloatingSidebarToggle() {
+  const { state, toggleSidebar } = useSidebar();
+  // Expand if collapsed, collapse if expanded
+  const isCollapsed = state === "collapsed";
+  return (
+    <button
+      aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+      onClick={toggleSidebar}
+      className={`
+        fixed z-50 top-5 left-5
+        md:absolute md:z-30 md:top-5 md:left-5
+        bg-torgovo-purple hover:bg-torgovo-blue
+        text-white rounded-full shadow-lg
+        flex items-center justify-center
+        transition-colors
+        w-10 h-10
+        border border-white/10
+        focus:outline-none focus:ring-2 focus:ring-torgovo-blue
+      `}
+      style={{
+        // To ensure visibility above everything else
+        boxShadow: "0 4px 24px 0 rgba(50,50,80,0.2)",
+      }}
+    >
+      {isCollapsed ? (
+        <ChevronsRight size={24} />
+      ) : (
+        <ChevronsLeft size={24} />
+      )}
+    </button>
+  );
+}
 
 const DashboardLayout = () => {
   const [notifications, setNotifications] = useState(3);
@@ -48,27 +91,23 @@ const DashboardLayout = () => {
               </div>
               <div className="font-semibold text-lg tracking-tight">Torgovo</div>
             </div>
-            <div className="ml-auto">
-              <SidebarTrigger />
-            </div>
+            {/* Removed SidebarTrigger button from header */}
           </SidebarHeader>
-          
           <SidebarContent>
             <SidebarGroup>
               <div className="px-4 py-2">
                 <form>
                   <div className="relative">
-                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground z-10" />
                     <Input
                       type="search"
                       placeholder="Search..."
-                      className="w-full bg-sidebar-accent pl-8 text-sm"
+                      className="w-full bg-sidebar-accent pl-8 text-sm z-9"
                     />
                   </div>
                 </form>
               </div>
             </SidebarGroup>
-
             <SidebarGroup>
               <SidebarGroupLabel>Overview</SidebarGroupLabel>
               <SidebarMenu>
@@ -82,7 +121,6 @@ const DashboardLayout = () => {
                 </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroup>
-            
             <SidebarGroup>
               <SidebarGroupLabel>Trading Bots</SidebarGroupLabel>
               <SidebarMenu>
@@ -104,7 +142,6 @@ const DashboardLayout = () => {
                 </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroup>
-
             <SidebarGroup>
               <SidebarGroupLabel>Management</SidebarGroupLabel>
               <SidebarMenu>
@@ -126,7 +163,6 @@ const DashboardLayout = () => {
                 </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroup>
-
             <SidebarGroup>
               <SidebarGroupLabel>Account</SidebarGroupLabel>
               <SidebarMenu>
@@ -149,7 +185,6 @@ const DashboardLayout = () => {
               </SidebarMenu>
             </SidebarGroup>
           </SidebarContent>
-          
           <SidebarFooter>
             <div className="flex items-center gap-4 p-4">
               <DropdownMenu>
@@ -179,9 +214,7 @@ const DashboardLayout = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              
               <Separator orientation="vertical" className="h-8" />
-              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="relative size-8">
@@ -225,9 +258,10 @@ const DashboardLayout = () => {
             </div>
           </SidebarFooter>
         </Sidebar>
-        
         <SidebarInset>
-          <div className="flex-1 p-4 md:p-6">
+          {/* Floating toggle button, always visible */}
+          <FloatingSidebarToggle />
+          <div className="flex-1 p-4 md:p-6 relative z-0">
             <Outlet />
           </div>
         </SidebarInset>
@@ -237,3 +271,5 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+
+// ... end of file
