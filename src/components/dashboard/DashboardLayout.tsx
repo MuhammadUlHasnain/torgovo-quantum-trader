@@ -1,55 +1,19 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarFooter,
-  SidebarInset,
-  useSidebar,
-} from "@/components/ui/sidebar";
-import {
-  Home,
-  Bot,
-  PlusCircle,
-  LineChart,
-  Settings,
-  HelpCircle,
-  LogOut,
-  Database,
-  Bell,
-  User,
-  Search,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
+import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset, useSidebar } from "@/components/ui/sidebar";
+import { Home, Bot, PlusCircle, LineChart, Settings, HelpCircle, LogOut, Database, Bell, User, Search, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 function FloatingSidebarToggle() {
-  const { state, toggleSidebar } = useSidebar();
+  const {
+    state,
+    toggleSidebar
+  } = useSidebar();
   const isCollapsed = state === "collapsed";
-  return (
-    <button
-      aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-      onClick={toggleSidebar}
-      className={`
+  return <button aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"} onClick={toggleSidebar} className={`
         absolute left-0 top-1/2 -translate-y-1/2
         md:left-0 md:top-1/2 md:-translate-y-1/2
         bg-torgovo-purple hover:bg-torgovo-blue
@@ -60,26 +24,16 @@ function FloatingSidebarToggle() {
         border border-white/10
         focus:outline-none focus:ring-2 focus:ring-torgovo-blue
         z-30
-      `}
-      style={{
-        marginLeft: '16px',
-        boxShadow: "0 4px 24px 0 rgba(50,50,80,0.18)",
-      }}
-    >
-      {isCollapsed ? (
-        <ChevronsRight size={18} />
-      ) : (
-        <ChevronsLeft size={18} />
-      )}
-    </button>
-  );
+      `} style={{
+    marginLeft: '16px',
+    boxShadow: "0 4px 24px 0 rgba(50,50,80,0.18)"
+  }}>
+      {isCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+    </button>;
 }
-
 const DashboardLayout = () => {
   const [notifications, setNotifications] = useState(3);
-
-  return (
-    <SidebarProvider>
+  return <SidebarProvider>
       <div className="flex min-h-screen w-full bg-sidebar-background">
         <Sidebar variant="inset">
           <SidebarHeader className="flex h-14 items-center px-4">
@@ -96,11 +50,7 @@ const DashboardLayout = () => {
                 <form>
                   <div className="relative">
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground z-10" />
-                    <Input
-                      type="search"
-                      placeholder="Search..."
-                      className="w-full bg-sidebar-accent pl-8 text-sm z-9"
-                    />
+                    <Input type="search" placeholder="Search..." className="w-full bg-sidebar-accent pl-8 text-sm z-9" />
                   </div>
                 </form>
               </div>
@@ -213,11 +163,9 @@ const DashboardLayout = () => {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="relative size-8">
                     <Bell className="h-4 w-4" />
-                    {notifications > 0 && (
-                      <span className="absolute -top-1 -right-1 size-4 rounded-full bg-torgovo-purple text-[10px] font-medium flex items-center justify-center text-white">
+                    {notifications > 0 && <span className="absolute -top-1 -right-1 size-4 rounded-full bg-torgovo-purple text-[10px] font-medium flex items-center justify-center text-white">
                         {notifications}
-                      </span>
-                    )}
+                      </span>}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -256,7 +204,7 @@ const DashboardLayout = () => {
           <div className="relative w-full">
             <FloatingSidebarToggle />
             <div className="flex items-center pl-14 pt-2 pb-2">
-              <span className="text-xl font-semibold text-white">Management</span>
+              
             </div>
           </div>
           <div className="flex-1 p-4 md:p-6 relative z-0">
@@ -264,8 +212,6 @@ const DashboardLayout = () => {
           </div>
         </SidebarInset>
       </div>
-    </SidebarProvider>
-  );
+    </SidebarProvider>;
 };
-
 export default DashboardLayout;
