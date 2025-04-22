@@ -27,6 +27,8 @@ import Blog from "./pages/Blog";
 import HelpSupport from "./pages/HelpSupport";
 import Analytics from "./pages/dashboard/Analytics";
 import ScrollToTop from "./components/layout/ScrollToTop";
+import CreateBot from "./pages/dashboard/CreateBot";
+import Support from "./pages/dashboard/Support";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +61,8 @@ const App = () => (
             <Route path="exchanges" element={<ExchangeConnections />} />
             <Route path="settings" element={<UserSettings />} />
             <Route path="analytics" element={<Analytics />} />
+            <Route path="create-bot" element={<CreateBot />} />
+            <Route path="support" element={<Support />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />
