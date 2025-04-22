@@ -8,7 +8,7 @@ import FeatureSection from "@/components/ui/feature-section";
 import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import FuturesTradingVisual from "@/components/trading/FuturesTradingVisual";
-import ComparisonTable from "@/components/ui/ComparisonTable";
+import ComparisonTable from "@/components/ui/comparison-table";
 
 const FuturesBots = () => {
   return (
