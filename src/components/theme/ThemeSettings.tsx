@@ -44,15 +44,14 @@ const ThemeSettings = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-4">
             {themes.map((themeOption) => (
               <Button
                 key={themeOption.value}
                 variant={theme === themeOption.value ? 'default' : 'outline'}
-                size="sm"
                 onClick={() => handleThemeChange(themeOption.value)}
                 className={cn(
-                  'flex items-center gap-2 transition-all',
+                  'flex flex-col items-center gap-2 h-20 transition-all',
                   theme === themeOption.value && 'bg-accent-primary text-accent-primary-foreground hover:bg-accent-primary/90'
                 )}
               >
