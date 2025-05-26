@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
 import FeatureSection from "@/components/ui/feature-section";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const Home = () => {
   return (
-    <>
+    <Layout>
       {/* Hero Section */}
       <HeroSection
         fullHeight
@@ -188,7 +189,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </>
+    </Layout>
   );
 };
 

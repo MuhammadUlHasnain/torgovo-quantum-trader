@@ -22,14 +22,10 @@ export const useTheme = () => {
   return context;
 };
 
-interface ThemeProviderProps {
-  children: React.ReactNode;
-}
-
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('torgovo-theme') as Theme;
+      const saved = localStorage.getItem('theme') as Theme;
       return saved || 'system';
     }
     return 'system';
@@ -37,7 +33,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   const [accentColor, setAccentColor] = useState<AccentColor>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('torgovo-accent-color') as AccentColor;
+      const saved = localStorage.getItem('accent-color') as AccentColor;
       return saved || 'purple';
     }
     return 'purple';
@@ -58,7 +54,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
-      console.log('System theme changed to:', e.matches ? 'dark' : 'light');
       setSystemTheme(e.matches ? 'dark' : 'light');
     };
 
@@ -70,9 +65,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    console.log('Applying theme:', theme, 'resolved to:', resolvedTheme);
-    localStorage.setItem('torgovo-theme', theme);
-    
+    localStorage.setItem('theme', theme);
     const root = document.documentElement;
     
     // Remove existing theme classes
@@ -89,9 +82,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    console.log('Applying accent color:', accentColor);
-    localStorage.setItem('torgovo-accent-color', accentColor);
-    
+    localStorage.setItem('accent-color', accentColor);
     const root = document.documentElement;
     
     // Remove existing accent color classes
@@ -105,12 +96,12 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   }, [accentColor]);
 
   const handleSetTheme = (newTheme: Theme) => {
-    console.log('Theme change requested:', newTheme);
+    console.log('Setting theme to:', newTheme);
     setTheme(newTheme);
   };
 
   const handleSetAccentColor = (newColor: AccentColor) => {
-    console.log('Accent color change requested:', newColor);
+    console.log('Setting accent color to:', newColor);
     setAccentColor(newColor);
   };
 
