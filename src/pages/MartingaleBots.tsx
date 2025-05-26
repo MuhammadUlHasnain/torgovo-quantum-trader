@@ -1,5 +1,5 @@
+
 import React from "react";
-import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +9,7 @@ import ComparisonTable from "@/components/ui/comparison-table";
 
 const MartingaleBots = () => {
   return (
-    <Layout>
+    <>
       <HeroSection
         heroTitle="MARTINGALE Trading Bots"
         subtitle="Leverage cost-averaging strategies that adjust positions based on market movements for optimal results."
@@ -240,7 +240,7 @@ const MartingaleBots = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

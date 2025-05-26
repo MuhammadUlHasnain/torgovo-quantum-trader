@@ -1,4 +1,3 @@
-
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
@@ -13,7 +12,7 @@ import ComparisonTable from "@/components/ui/comparison-table";
 
 const SpotBots = () => {
   return (
-    <Layout>
+    <>
       <HeroSection
         heroTitle="SPOT Trading Bots"
         subtitle="Automated bots that trade spot markets with precision and efficiency."
@@ -287,7 +286,7 @@ const SpotBots = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

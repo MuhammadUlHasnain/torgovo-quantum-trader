@@ -1,6 +1,4 @@
-
 import React, { useState } from "react";
-import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/ui/hero-section";
 import PricingCard, { PricingTier } from "@/components/ui/pricing-card";
 import { Button } from "@/components/ui/button";
@@ -92,7 +90,7 @@ const Pricing = () => {
   ];
 
   return (
-    <Layout>
+    <>
       <HeroSection
         heroTitle="Simple, Transparent Pricing"
         subtitle="Choose the plan that fits your trading needs. All plans include our core automation features."
@@ -231,7 +229,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 
