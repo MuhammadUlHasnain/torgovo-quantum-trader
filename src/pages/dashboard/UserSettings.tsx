@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -19,17 +18,20 @@ import {
   Save, 
   Shield, 
   User, 
-  X 
+  X,
+  Monitor,
+  Moon,
+  Sun
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
+import ThemeSettings from "@/components/theme/ThemeSettings";
 
 const UserSettings = () => {
   const [showCurrentPassword, setShowCurrentPassword] = React.useState(false);
   const [showNewPassword, setShowNewPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-  const [themeMode, setThemeMode] = React.useState("dark");
   
   const handleSaveProfile = () => {
     toast.success("Profile settings saved successfully!");
@@ -60,7 +62,7 @@ const UserSettings = () => {
         <TabsList className="mb-4 flex h-auto flex-wrap items-center justify-start overflow-visible rounded-none border-b border-border p-0 w-full">
           <TabsTrigger
             value="profile"
-            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-torgovo-purple data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-accent-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
           >
             <div className="flex items-center space-x-2">
               <User className="h-4 w-4" />
@@ -69,7 +71,7 @@ const UserSettings = () => {
           </TabsTrigger>
           <TabsTrigger
             value="security"
-            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-torgovo-purple data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-accent-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
           >
             <div className="flex items-center space-x-2">
               <Shield className="h-4 w-4" />
@@ -78,7 +80,7 @@ const UserSettings = () => {
           </TabsTrigger>
           <TabsTrigger
             value="notifications"
-            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-torgovo-purple data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-accent-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
           >
             <div className="flex items-center space-x-2">
               <Bell className="h-4 w-4" />
@@ -87,7 +89,7 @@ const UserSettings = () => {
           </TabsTrigger>
           <TabsTrigger
             value="subscription"
-            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-torgovo-purple data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-accent-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
           >
             <div className="flex items-center space-x-2">
               <CreditCard className="h-4 w-4" />
@@ -96,29 +98,10 @@ const UserSettings = () => {
           </TabsTrigger>
           <TabsTrigger
             value="appearance"
-            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-torgovo-purple data-[state=active]:text-foreground data-[state=active]:shadow-none"
+            className="relative rounded-none border-b-2 border-transparent py-3 transition-none data-[state=active]:border-b-accent-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
           >
             <div className="flex items-center space-x-2">
-              <svg
-                className="h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2" />
-                <path d="M12 20v2" />
-                <path d="m4.93 4.93 1.41 1.41" />
-                <path d="m17.66 17.66 1.41 1.41" />
-                <path d="M2 12h2" />
-                <path d="M20 12h2" />
-                <path d="m6.34 17.66-1.41 1.41" />
-                <path d="m19.07 4.93-1.41 1.41" />
-              </svg>
+              <Sun className="h-4 w-4" />
               <span>Appearance</span>
             </div>
           </TabsTrigger>
@@ -888,121 +871,7 @@ const UserSettings = () => {
         
         {/* Appearance Tab */}
         <TabsContent value="appearance" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Appearance</CardTitle>
-              <CardDescription>
-                Customize the look and feel of the application
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <h3 className="text-lg font-medium mb-4">Theme</h3>
-                <div className="grid grid-cols-3 gap-4">
-                  <div 
-                    className={`border rounded-lg p-4 cursor-pointer transition-all ${
-                      themeMode === "dark" 
-                        ? "bg-torgovo-purple/10 border-torgovo-purple/50" 
-                        : "bg-muted/20 hover:bg-muted/30"
-                    }`}
-                    onClick={() => setThemeMode("dark")}
-                  >
-                    <div className="h-24 rounded-md bg-background mb-2 flex items-center justify-center">
-                      <div className="w-1/2 h-1/2 bg-torgovo-purple/20 rounded" />
-                    </div>
-                    <p className="font-medium text-sm text-center">Dark</p>
-                  </div>
-                  
-                  <div 
-                    className={`border rounded-lg p-4 cursor-pointer transition-all ${
-                      themeMode === "light" 
-                        ? "bg-torgovo-purple/10 border-torgovo-purple/50" 
-                        : "bg-muted/20 hover:bg-muted/30"
-                    }`}
-                    onClick={() => setThemeMode("light")}
-                  >
-                    <div className="h-24 rounded-md bg-white mb-2 flex items-center justify-center">
-                      <div className="w-1/2 h-1/2 bg-torgovo-purple/20 rounded" />
-                    </div>
-                    <p className="font-medium text-sm text-center text-black">Light</p>
-                  </div>
-                  
-                  <div 
-                    className={`border rounded-lg p-4 cursor-pointer transition-all ${
-                      themeMode === "system" 
-                        ? "bg-torgovo-purple/10 border-torgovo-purple/50" 
-                        : "bg-muted/20 hover:bg-muted/30"
-                    }`}
-                    onClick={() => setThemeMode("system")}
-                  >
-                    <div className="h-24 rounded-md bg-gradient-to-r from-background to-white mb-2 flex items-center justify-center">
-                      <div className="w-1/2 h-1/2 bg-torgovo-purple/20 rounded" />
-                    </div>
-                    <p className="font-medium text-sm text-center">System</p>
-                  </div>
-                </div>
-              </div>
-              
-              <Separator />
-              
-              <div>
-                <h3 className="text-lg font-medium mb-4">Accent Color</h3>
-                <div className="grid grid-cols-6 gap-4">
-                  <div className="border rounded-full h-12 w-12 bg-torgovo-purple cursor-pointer flex items-center justify-center">
-                    <Check className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="border rounded-full h-12 w-12 bg-blue-500 cursor-pointer"></div>
-                  <div className="border rounded-full h-12 w-12 bg-green-500 cursor-pointer"></div>
-                  <div className="border rounded-full h-12 w-12 bg-orange-500 cursor-pointer"></div>
-                  <div className="border rounded-full h-12 w-12 bg-pink-500 cursor-pointer"></div>
-                  <div className="border rounded-full h-12 w-12 bg-teal-500 cursor-pointer"></div>
-                </div>
-              </div>
-              
-              <Separator />
-              
-              <div>
-                <h3 className="text-lg font-medium mb-4">Layout Options</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="condensed-view" className="flex flex-col space-y-1">
-                      <span>Condensed View</span>
-                      <span className="font-normal text-xs text-muted-foreground">
-                        Show more content with less spacing
-                      </span>
-                    </Label>
-                    <Switch id="condensed-view" />
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="large-fonts" className="flex flex-col space-y-1">
-                      <span>Large Fonts</span>
-                      <span className="font-normal text-xs text-muted-foreground">
-                        Increase text size throughout the app
-                      </span>
-                    </Label>
-                    <Switch id="large-fonts" />
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="animations" className="flex flex-col space-y-1">
-                      <span>Animations</span>
-                      <span className="font-normal text-xs text-muted-foreground">
-                        Enable or disable UI animations
-                      </span>
-                    </Label>
-                    <Switch id="animations" defaultChecked />
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex justify-end">
-                <Button className="bg-torgovo-purple hover:bg-torgovo-purple/90">
-                  Save Appearance Settings
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <ThemeSettings />
         </TabsContent>
       </Tabs>
     </div>
