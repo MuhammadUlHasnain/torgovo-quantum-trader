@@ -7,7 +7,7 @@ import { Monitor, Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const ThemeSettings = () => {
-  const { theme, accentColor, setTheme, setAccentColor } = useTheme();
+  const { theme, accentColor, setTheme, setAccentColor, resolvedTheme } = useTheme();
 
   const themes: { value: Theme; label: string; icon: React.ReactNode }[] = [
     { value: 'light', label: 'Light', icon: <Sun className="h-4 w-4" /> },
@@ -24,13 +24,23 @@ const ThemeSettings = () => {
     { value: 'cyan', label: 'Cyan', color: 'bg-cyan-500' },
   ];
 
+  const handleThemeChange = (newTheme: Theme) => {
+    console.log('Theme button clicked:', newTheme);
+    setTheme(newTheme);
+  };
+
+  const handleAccentColorChange = (newColor: AccentColor) => {
+    console.log('Accent color button clicked:', newColor);
+    setAccentColor(newColor);
+  };
+
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
           <CardTitle>Theme</CardTitle>
           <CardDescription>
-            Choose how the interface looks and feels
+            Choose how the interface looks and feels. Current: {theme} (resolved: {resolvedTheme})
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -40,10 +50,10 @@ const ThemeSettings = () => {
                 key={themeOption.value}
                 variant={theme === themeOption.value ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setTheme(themeOption.value)}
+                onClick={() => handleThemeChange(themeOption.value)}
                 className={cn(
                   'flex items-center gap-2 transition-all',
-                  theme === themeOption.value && 'bg-accent-primary text-accent-primary-foreground'
+                  theme === themeOption.value && 'bg-accent-primary text-accent-primary-foreground hover:bg-accent-primary/90'
                 )}
               >
                 {themeOption.icon}
@@ -58,7 +68,7 @@ const ThemeSettings = () => {
         <CardHeader>
           <CardTitle>Accent Color</CardTitle>
           <CardDescription>
-            Customize the accent color throughout the application
+            Customize the accent color throughout the application. Current: {accentColor}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -66,9 +76,9 @@ const ThemeSettings = () => {
             {accentColors.map((color) => (
               <button
                 key={color.value}
-                onClick={() => setAccentColor(color.value)}
+                onClick={() => handleAccentColorChange(color.value)}
                 className={cn(
-                  'relative h-10 w-10 rounded-full transition-all hover:scale-110',
+                  'relative h-10 w-10 rounded-full transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2',
                   color.color,
                   accentColor === color.value && 'ring-2 ring-offset-2 ring-accent-primary ring-offset-background'
                 )}
@@ -76,7 +86,7 @@ const ThemeSettings = () => {
               >
                 {accentColor === color.value && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-2 w-2 rounded-full bg-white" />
+                    <div className="h-2 w-2 rounded-full bg-white shadow-lg" />
                   </div>
                 )}
               </button>

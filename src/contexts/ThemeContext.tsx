@@ -24,22 +24,34 @@ export const useTheme = () => {
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('theme') as Theme;
-    return saved || 'system';
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme') as Theme;
+      return saved || 'system';
+    }
+    return 'system';
   });
 
   const [accentColor, setAccentColor] = useState<AccentColor>(() => {
-    const saved = localStorage.getItem('accent-color') as AccentColor;
-    return saved || 'purple';
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('accent-color') as AccentColor;
+      return saved || 'purple';
+    }
+    return 'purple';
   });
 
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => 
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'light';
+  });
 
   const resolvedTheme = theme === 'system' ? systemTheme : theme;
 
+  // Listen for system theme changes
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
       setSystemTheme(e.matches ? 'dark' : 'light');
@@ -49,7 +61,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
+  // Apply theme to document
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     localStorage.setItem('theme', theme);
     const root = document.documentElement;
     
@@ -63,7 +78,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.setAttribute('data-theme', resolvedTheme);
   }, [theme, resolvedTheme]);
 
+  // Apply accent color to document
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     localStorage.setItem('accent-color', accentColor);
     const root = document.documentElement;
     
@@ -78,10 +96,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [accentColor]);
 
   const handleSetTheme = (newTheme: Theme) => {
+    console.log('Setting theme to:', newTheme);
     setTheme(newTheme);
   };
 
   const handleSetAccentColor = (newColor: AccentColor) => {
+    console.log('Setting accent color to:', newColor);
     setAccentColor(newColor);
   };
 
