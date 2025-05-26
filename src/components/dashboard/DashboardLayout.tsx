@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
 function FloatingSidebarToggle() {
   const {
     state,
@@ -14,32 +15,30 @@ function FloatingSidebarToggle() {
   } = useSidebar();
   const isCollapsed = state === "collapsed";
   return <button aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"} onClick={toggleSidebar} className={`
-        absolute left-0 top-1/2 -translate-y-1/2
-        md:left-0 md:top-1/2 md:-translate-y-1/2
-        bg-torgovo-purple hover:bg-torgovo-blue
-        text-white rounded-full shadow-lg
+        absolute left-4 top-4 z-50
+        bg-accent-primary hover:bg-accent-primary/90
+        text-accent-primary-foreground rounded-full shadow-lg
         flex items-center justify-center
-        transition-colors
-        w-8 h-8
+        transition-all duration-200 hover:scale-105
+        w-10 h-10
         border border-white/10
-        focus:outline-none focus:ring-2 focus:ring-torgovo-blue
-        z-30
+        focus:outline-none focus:ring-2 focus:ring-accent-primary
       `} style={{
-    marginLeft: '16px',
     boxShadow: "0 4px 24px 0 rgba(50,50,80,0.18)"
   }}>
       {isCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
     </button>;
 }
+
 const DashboardLayout = () => {
   const [notifications, setNotifications] = useState(3);
   return <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-sidebar-background">
-        <Sidebar variant="inset">
+      <div className="flex min-h-screen w-full bg-sidebar-background theme-transition">
+        <Sidebar variant="inset" className="theme-transition">
           <SidebarHeader className="flex h-14 items-center px-4">
             <div className="flex items-center gap-2">
-              <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gradient-to-br from-torgovo-blue to-torgovo-purple">
-                <div className="absolute inset-0 flex items-center justify-center text-white font-bold">T</div>
+              <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gradient-to-br from-accent-primary/80 to-accent-primary">
+                <div className="absolute inset-0 flex items-center justify-center text-accent-primary-foreground font-bold">T</div>
               </div>
               <div className="font-semibold text-lg tracking-tight">Torgovo</div>
             </div>
@@ -50,7 +49,7 @@ const DashboardLayout = () => {
                 <form>
                   <div className="relative">
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground z-10" />
-                    <Input type="search" placeholder="Search..." className="w-full bg-sidebar-accent pl-8 text-sm z-9" />
+                    <Input type="search" placeholder="Search..." className="w-full bg-sidebar-accent pl-8 text-sm z-9 theme-transition" />
                   </div>
                 </form>
               </div>
@@ -136,11 +135,11 @@ const DashboardLayout = () => {
             <div className="flex items-center gap-4 p-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative size-8 rounded-full bg-torgovo-blue flex items-center justify-center">
-                    <User className="h-5 w-5 text-white" />
+                  <Button variant="ghost" className="relative size-8 rounded-full bg-accent-primary hover:bg-accent-primary/90 flex items-center justify-center transition-colors">
+                    <User className="h-4 w-4 text-accent-primary-foreground" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className="theme-transition">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
@@ -161,14 +160,14 @@ const DashboardLayout = () => {
               <Separator orientation="vertical" className="h-8" />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="relative size-8">
+                  <Button variant="ghost" size="icon" className="relative size-8 hover:bg-sidebar-accent transition-colors">
                     <Bell className="h-4 w-4" />
-                    {notifications > 0 && <span className="absolute -top-1 -right-1 size-4 rounded-full bg-torgovo-purple text-[10px] font-medium flex items-center justify-center text-white">
+                    {notifications > 0 && <span className="absolute -top-1 -right-1 size-4 rounded-full bg-accent-primary text-[10px] font-medium flex items-center justify-center text-accent-primary-foreground">
                         {notifications}
                       </span>}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className="theme-transition">
                   <DropdownMenuLabel>Notifications</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <div className="max-h-[300px] overflow-auto">
@@ -203,15 +202,16 @@ const DashboardLayout = () => {
         <SidebarInset>
           <div className="relative w-full">
             <FloatingSidebarToggle />
-            <div className="flex items-center pl-14 pt-2 pb-2">
+            <div className="flex items-center pl-20 pt-2 pb-2">
               
             </div>
           </div>
-          <div className="flex-1 p-4 md:p-6 relative z-0">
+          <div className="flex-1 p-4 md:p-6 relative z-0 theme-transition">
             <Outlet />
           </div>
         </SidebarInset>
       </div>
     </SidebarProvider>;
 };
+
 export default DashboardLayout;

@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import Home from "./pages/Home";
 import GridBots from "./pages/GridBots";
 import SpotBots from "./pages/SpotBots";
@@ -34,41 +35,43 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/grid-bots" element={<GridBots />} />
-          <Route path="/spot-bots" element={<SpotBots />} />
-          <Route path="/futures-bots" element={<FuturesBots />} />
-          <Route path="/martingale-bots" element={<MartingaleBots />} />
-          <Route path="/tutorial" element={<Tutorial />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/faqs" element={<FAQs />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/help-support" element={<HelpSupport />} />
-          
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/signup" element={<Signup />} />
-          
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<DashboardHome />} />
-            <Route path="bots" element={<BotManagement />} />
-            <Route path="exchanges" element={<ExchangeConnections />} />
-            <Route path="settings" element={<UserSettings />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="create-bot" element={<CreateBot />} />
-            <Route path="support" element={<Support />} />
-          </Route>
-          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/grid-bots" element={<GridBots />} />
+            <Route path="/spot-bots" element={<SpotBots />} />
+            <Route path="/futures-bots" element={<FuturesBots />} />
+            <Route path="/martingale-bots" element={<MartingaleBots />} />
+            <Route path="/tutorial" element={<Tutorial />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/help-support" element={<HelpSupport />} />
+            
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/signup" element={<Signup />} />
+            
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<DashboardHome />} />
+              <Route path="bots" element={<BotManagement />} />
+              <Route path="exchanges" element={<ExchangeConnections />} />
+              <Route path="settings" element={<UserSettings />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="create-bot" element={<CreateBot />} />
+              <Route path="support" element={<Support />} />
+            </Route>
+            
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

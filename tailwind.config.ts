@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -72,6 +73,11 @@ export default {
 					'purple-dim': '#7E69AB',
 					'purple-light': '#D6BCFA',
 					gray: '#aaadb0',
+				},
+				// Dynamic accent colors
+				'accent-primary': {
+					DEFAULT: 'hsl(var(--accent-primary))',
+					foreground: 'hsl(var(--accent-primary-foreground))'
 				}
 			},
 			borderRadius: {
