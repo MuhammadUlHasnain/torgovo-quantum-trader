@@ -1,78 +1,50 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import Layout from '@/components/layout/Layout';
+import DashboardLayout from '@/components/dashboard/DashboardLayout';
+import ScrollToTop from '@/components/layout/ScrollToTop';
+import Home from '@/pages/Home';
+import About from '@/pages/About';
+import Contact from '@/pages/Contact';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import Dashboard from '@/pages/Dashboard';
+import DashboardHome from '@/pages/dashboard/DashboardHome';
+import DashboardSettings from '@/pages/dashboard/DashboardSettings';
+import DashboardProfile from '@/pages/dashboard/DashboardProfile';
+import NotFound from '@/pages/NotFound';
 
-import React from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import Home from "./pages/Home";
-import GridBots from "./pages/GridBots";
-import SpotBots from "./pages/SpotBots";
-import FuturesBots from "./pages/FuturesBots";
-import MartingaleBots from "./pages/MartingaleBots";
-import Tutorial from "./pages/Tutorial";
-import Pricing from "./pages/Pricing";
-import About from "./pages/About";
-import Dashboard from "./pages/Dashboard";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup";
-import DashboardHome from "./pages/dashboard/DashboardHome";
-import BotManagement from "./pages/dashboard/BotManagement";
-import ExchangeConnections from "./pages/dashboard/ExchangeConnections";
-import UserSettings from "./pages/dashboard/UserSettings";
-import DashboardLayout from "./components/dashboard/DashboardLayout";
-import FAQs from "./pages/FAQs";
-import Blog from "./pages/Blog";
-import HelpSupport from "./pages/HelpSupport";
-import Analytics from "./pages/dashboard/Analytics";
-import ScrollToTop from "./components/layout/ScrollToTop";
-import CreateBot from "./pages/dashboard/CreateBot";
-import Support from "./pages/dashboard/Support";
-
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+const App = () => {
+  console.log('App component rendering');
+  
+  return (
     <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/grid-bots" element={<GridBots />} />
-            <Route path="/spot-bots" element={<SpotBots />} />
-            <Route path="/futures-bots" element={<FuturesBots />} />
-            <Route path="/martingale-bots" element={<MartingaleBots />} />
-            <Route path="/tutorial" element={<Tutorial />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/help-support" element={<HelpSupport />} />
-            
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/signup" element={<Signup />} />
-            
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<DashboardHome />} />
-              <Route path="bots" element={<BotManagement />} />
-              <Route path="exchanges" element={<ExchangeConnections />} />
-              <Route path="settings" element={<UserSettings />} />
-              <Route path="analytics" element={<Analytics />} />
-              <Route path="create-bot" element={<CreateBot />} />
-              <Route path="support" element={<Support />} />
-            </Route>
-            
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          
+          {/* Dashboard routes */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="settings" element={<DashboardSettings />} />
+            <Route path="profile" element={<DashboardProfile />} />
+          </Route>
+          
+          {/* Catch-all route */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
-  </QueryClientProvider>
-);
+  );
+};
 
 export default App;

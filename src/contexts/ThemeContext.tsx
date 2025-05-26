@@ -25,7 +25,7 @@ export const useTheme = () => {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme') as Theme;
+      const saved = localStorage.getItem('torgovo-theme') as Theme;
       return saved || 'system';
     }
     return 'system';
@@ -33,7 +33,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const [accentColor, setAccentColor] = useState<AccentColor>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('accent-color') as AccentColor;
+      const saved = localStorage.getItem('torgovo-accent-color') as AccentColor;
       return saved || 'purple';
     }
     return 'purple';
@@ -54,6 +54,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
+      console.log('System theme changed to:', e.matches ? 'dark' : 'light');
       setSystemTheme(e.matches ? 'dark' : 'light');
     };
 
@@ -65,7 +66,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    localStorage.setItem('theme', theme);
+    console.log('Applying theme:', theme, 'resolved to:', resolvedTheme);
+    localStorage.setItem('torgovo-theme', theme);
+    
     const root = document.documentElement;
     
     // Remove existing theme classes
@@ -82,7 +85,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    localStorage.setItem('accent-color', accentColor);
+    console.log('Applying accent color:', accentColor);
+    localStorage.setItem('torgovo-accent-color', accentColor);
+    
     const root = document.documentElement;
     
     // Remove existing accent color classes
@@ -96,12 +101,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [accentColor]);
 
   const handleSetTheme = (newTheme: Theme) => {
-    console.log('Setting theme to:', newTheme);
+    console.log('Theme change requested:', newTheme);
     setTheme(newTheme);
   };
 
   const handleSetAccentColor = (newColor: AccentColor) => {
-    console.log('Setting accent color to:', newColor);
+    console.log('Accent color change requested:', newColor);
     setAccentColor(newColor);
   };
 

@@ -25,12 +25,12 @@ const ThemeSettings = () => {
   ];
 
   const handleThemeChange = (newTheme: Theme) => {
-    console.log('Theme button clicked:', newTheme);
+    console.log('Theme button clicked:', newTheme, 'current theme:', theme);
     setTheme(newTheme);
   };
 
   const handleAccentColorChange = (newColor: AccentColor) => {
-    console.log('Accent color button clicked:', newColor);
+    console.log('Accent color button clicked:', newColor, 'current color:', accentColor);
     setAccentColor(newColor);
   };
 
@@ -53,7 +53,9 @@ const ThemeSettings = () => {
                 onClick={() => handleThemeChange(themeOption.value)}
                 className={cn(
                   'flex items-center gap-2 transition-all',
-                  theme === themeOption.value && 'bg-accent-primary text-accent-primary-foreground hover:bg-accent-primary/90'
+                  theme === themeOption.value 
+                    ? 'bg-accent-primary text-accent-primary-foreground hover:bg-accent-primary/90' 
+                    : 'hover:bg-accent hover:text-accent-foreground'
                 )}
               >
                 {themeOption.icon}
@@ -78,9 +80,9 @@ const ThemeSettings = () => {
                 key={color.value}
                 onClick={() => handleAccentColorChange(color.value)}
                 className={cn(
-                  'relative h-10 w-10 rounded-full transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2',
+                  'relative h-10 w-10 rounded-full transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-primary focus:ring-offset-background',
                   color.color,
-                  accentColor === color.value && 'ring-2 ring-offset-2 ring-accent-primary ring-offset-background'
+                  accentColor === color.value && 'ring-2 ring-offset-2 ring-accent-primary ring-offset-background scale-110'
                 )}
                 title={color.label}
               >
