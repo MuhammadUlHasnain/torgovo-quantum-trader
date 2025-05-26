@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { SidebarProvider, Sidebar, SidebarInset } from "@/components/ui/sidebar";
@@ -6,10 +5,8 @@ import FloatingSidebarToggle from "./FloatingSidebarToggle";
 import DashboardSidebarHeader from "./DashboardSidebarHeader";
 import DashboardSidebarNav from "./DashboardSidebarNav";
 import DashboardSidebarFooter from "./DashboardSidebarFooter";
-
 const DashboardLayout = () => {
-  return (
-    <SidebarProvider>
+  return <SidebarProvider>
       <div className="flex min-h-screen w-full bg-sidebar-background theme-transition">
         <Sidebar variant="inset" className="theme-transition">
           <DashboardSidebarHeader />
@@ -20,7 +17,7 @@ const DashboardLayout = () => {
         <SidebarInset>
           <div className="relative w-full">
             <FloatingSidebarToggle />
-            <div className="flex items-center pl-20 pt-2 pb-2">
+            <div className="flex items-center pl-20 pt-2 pb-2 py-[21px]">
               {/* Content header can go here */}
             </div>
           </div>
@@ -29,8 +26,6 @@ const DashboardLayout = () => {
           </div>
         </SidebarInset>
       </div>
-    </SidebarProvider>
-  );
+    </SidebarProvider>;
 };
-
 export default DashboardLayout;
