@@ -10,6 +10,7 @@ import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import SpotTradingVisual from "@/components/trading/SpotTradingVisual";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { Link } from "react-router-dom";
 
 const SpotBots = () => {
   return (
@@ -18,8 +19,8 @@ const SpotBots = () => {
         heroTitle="SPOT Trading Bots"
         subtitle="Automated bots that trade spot markets with precision and efficiency."
       >
-        <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-          Create Spot Bot
+        <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
+          <Link to="/pricing?type=custom">Subscribe Now</Link>
         </Button>
       </HeroSection>
       

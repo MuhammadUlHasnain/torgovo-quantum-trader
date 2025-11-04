@@ -20,8 +20,8 @@ const GridBots = () => {
         heroTitle="AI Powered Grid Bot"
         subtitle="Automate your trading with advanced AI-powered grid strategies that work in any market condition."
       >
-        <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-          Create AI Powered Grid Bot
+        <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
+          <Link to="/dashboard/invest-in-bot?type=ai_grid">Invest Now</Link>
         </Button>
       </HeroSection>
       

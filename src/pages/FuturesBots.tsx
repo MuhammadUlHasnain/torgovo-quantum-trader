@@ -9,6 +9,7 @@ import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import FuturesTradingVisual from "@/components/trading/FuturesTradingVisual";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { Link } from "react-router-dom";
 
 const FuturesBots = () => {
   return (
@@ -17,8 +18,8 @@ const FuturesBots = () => {
         heroTitle="FUTURES Trading Bots"
         subtitle="Automated bots that trade futures contracts with leverage and precision."
       >
-        <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-          Create Futures Bot
+        <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
+          <Link to="/pricing?type=custom">Subscribe Now</Link>
         </Button>
       </HeroSection>
 

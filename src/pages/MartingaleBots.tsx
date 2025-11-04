@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertCircle, ArrowRight, Check } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { Link } from "react-router-dom";
 
 const MartingaleBots = () => {
   return (
@@ -14,8 +15,8 @@ const MartingaleBots = () => {
         heroTitle="MARTINGALE Trading Bots"
         subtitle="Leverage cost-averaging strategies that adjust positions based on market movements for optimal results."
       >
-        <Button className="bg-torgovo-purple hover:bg-torgovo-purple/80">
-          Create Martingale Bot
+        <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
+          <Link to="/dashboard/invest-in-bot?type=martingale">Invest Now</Link>
         </Button>
       </HeroSection>
       
