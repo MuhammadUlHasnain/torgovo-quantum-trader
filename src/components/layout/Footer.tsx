@@ -81,6 +81,8 @@ const Footer = () => {
           <FooterSection title="Products">
             <FooterLink to="/grid-bots">Grid Bots</FooterLink>
             <FooterLink to="/martingale-bots">Martingale Bots</FooterLink>
+            <FooterLink to="/investment-bots">Invest in Bots</FooterLink>
+            <FooterLink to="/custom-bots">Custom Bots</FooterLink>
             <FooterLink to="/pricing">Pricing</FooterLink>
             <FooterLink to="/tutorial">Tutorial</FooterLink>
           </FooterSection>
