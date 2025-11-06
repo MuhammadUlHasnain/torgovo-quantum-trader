@@ -141,7 +141,7 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="min-w-[220px] p-2 relative">
+                <ul className="min-w-[220px] p-4 bg-background border border-border rounded-lg shadow-lg z-50">
                   <li>
                     <Link to="/blog">
                       <NavigationMenuLink className={navigationDropdownItemClass}>
