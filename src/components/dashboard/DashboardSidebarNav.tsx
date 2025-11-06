@@ -2,7 +2,7 @@
 import React from 'react';
 import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 import { Input } from '@/components/ui/input';
-import { Home, Bot, PlusCircle, LineChart, Settings, HelpCircle, Database, Search } from 'lucide-react';
+import { Home, Bot, PlusCircle, LineChart, Settings, HelpCircle, Database, Search, TrendingUp, Wallet, DollarSign } from 'lucide-react';
 
 const DashboardSidebarNav = () => {
   return (
@@ -48,10 +48,18 @@ const DashboardSidebarNav = () => {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Create Bot">
-              <a href="/dashboard/create-bot">
+            <SidebarMenuButton asChild tooltip="Create Custom Bot">
+              <a href="/dashboard/create-custom-bot">
                 <PlusCircle />
-                <span>Create Bot</span>
+                <span>Create Custom Bot</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Invest in Managed Bots">
+              <a href="/dashboard/invest-in-bot">
+                <TrendingUp />
+                <span>Invest in Bots</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -74,6 +82,14 @@ const DashboardSidebarNav = () => {
               <a href="/dashboard/analytics">
                 <LineChart />
                 <span>Analytics</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Withdrawals">
+              <a href="/dashboard/withdrawals">
+                <Wallet />
+                <span>Withdrawals</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

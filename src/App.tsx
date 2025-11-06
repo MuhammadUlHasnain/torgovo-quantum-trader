@@ -18,6 +18,8 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import InvestmentBots from "./pages/InvestmentBots";
+import CustomBots from "./pages/CustomBots";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import BotManagement from "./pages/dashboard/BotManagement";
 import ExchangeConnections from "./pages/dashboard/ExchangeConnections";
@@ -56,6 +58,8 @@ const App = () => (
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/help-support" element={<HelpSupport />} />
+            <Route path="/investment-bots" element={<InvestmentBots />} />
+            <Route path="/custom-bots" element={<CustomBots />} />
             
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/signup" element={<Signup />} />

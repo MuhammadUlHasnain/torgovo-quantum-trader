@@ -37,7 +37,7 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Bots</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2">
+                <ul className="grid w-[700px] gap-3 p-4 md:grid-cols-3">
                   <li>
                     <Link to="/grid-bots">
                       <NavigationMenuLink className={cn(navigationCardClass)}>
@@ -45,31 +45,7 @@ const Navbar = () => {
                           AI Powered Grid Bot
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Automate trading with our advanced AI-powered grid strategies
-                        </p>
-                      </NavigationMenuLink>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/spot-bots">
-                      <NavigationMenuLink className={cn(navigationCardClass)}>
-                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-blue">
-                          SPOT Bots
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Automated single entry/exit spot trading with precision
-                        </p>
-                      </NavigationMenuLink>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/futures-bots">
-                      <NavigationMenuLink className={cn(navigationCardClass)}>
-                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-purple">
-                          FUTURES Bots
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          Advanced trading with leverage for experienced traders
+                          Managed AI-powered grid strategies
                         </p>
                       </NavigationMenuLink>
                     </Link>
@@ -81,7 +57,55 @@ const Navbar = () => {
                           Martingale Bots
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Leverage cost-averaging strategy for optimal trading results
+                          Managed cost-averaging strategy
+                        </p>
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/investment-bots">
+                      <NavigationMenuLink className={cn(navigationCardClass)}>
+                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-blue">
+                          💰 Invest in Bots
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Invest in managed bots across exchanges
+                        </p>
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/spot-bots">
+                      <NavigationMenuLink className={cn(navigationCardClass)}>
+                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-blue">
+                          SPOT Bots
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Custom spot trading with TradingView
+                        </p>
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/futures-bots">
+                      <NavigationMenuLink className={cn(navigationCardClass)}>
+                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-purple">
+                          FUTURES Bots
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Custom futures trading with leverage
+                        </p>
+                      </NavigationMenuLink>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/custom-bots">
+                      <NavigationMenuLink className={cn(navigationCardClass)}>
+                        <div className="mb-2 mt-4 text-lg font-medium text-torgovo-purple">
+                          🔧 Custom Bots
+                        </div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          Create your own TradingView bots
                         </p>
                       </NavigationMenuLink>
                     </Link>
