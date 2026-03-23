@@ -77,11 +77,17 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Products Section */}
-          <FooterSection title="Products">
+          {/* Managed Bots Section */}
+          <FooterSection title="Managed Bots">
             <FooterLink to="/grid-bots">Grid Bots</FooterLink>
             <FooterLink to="/martingale-bots">Martingale Bots</FooterLink>
             <FooterLink to="/investment-bots">Invest in Bots</FooterLink>
+          </FooterSection>
+
+          {/* Custom Bots Section */}
+          <FooterSection title="Custom Bots">
+            <FooterLink to="/spot-bots">Spot Bots</FooterLink>
+            <FooterLink to="/futures-bots">Futures Bots</FooterLink>
             <FooterLink to="/custom-bots">Custom Bots</FooterLink>
             <FooterLink to="/pricing">Pricing</FooterLink>
             <FooterLink to="/tutorial">Tutorial</FooterLink>
