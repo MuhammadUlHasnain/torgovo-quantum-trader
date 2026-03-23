@@ -1,8 +1,12 @@
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Testimonial {
   name?: string;
@@ -30,11 +34,52 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
   className,
   ...props
 }) => {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      if (headerRef.current) {
+        gsap.from(headerRef.current, {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+
+      if (gridRef.current) {
+        gsap.from(gridRef.current.children, {
+          y: 60,
+          opacity: 0,
+          scale: 0.9,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section className={cn("py-12 md:py-16", className)} {...props}>
       <div className="container">
         {(title || subtitle) && (
-          <div className="mb-12 text-center">
+          <div ref={headerRef} className="mb-12 text-center">
             {title && (
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-torgovo-purple glow-text">
                 {title}
@@ -48,10 +93,13 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
           </div>
         )}
 
-        <div className={cn(
-          "grid gap-6",
-          variant === "grid" ? "md:grid-cols-2 lg:grid-cols-3" : ""
-        )}>
+        <div
+          ref={gridRef}
+          className={cn(
+            "grid gap-6",
+            variant === "grid" ? "md:grid-cols-2 lg:grid-cols-3" : ""
+          )}
+        >
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="glass-card overflow-hidden">
               <CardContent className="p-6">
@@ -62,31 +110,44 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({
                         key={i}
                         className={cn(
                           "h-4 w-4",
-                          i < testimonial.rating! 
-                            ? "text-torgovo-purple fill-torgovo-purple" 
+                          i < testimonial.rating!
+                            ? "text-torgovo-purple fill-torgovo-purple"
                             : "text-muted"
                         )}
                       />
                     ))}
                   </div>
                 )}
-                
+
                 <blockquote className="mb-4">
-                  <p className="text-muted-foreground italic">{testimonial.content || testimonial.quote ? `"${testimonial.content || testimonial.quote}"` : ""}</p>
+                  <p className="text-muted-foreground italic">
+                    {testimonial.content || testimonial.quote
+                      ? `"${testimonial.content || testimonial.quote}"`
+                      : ""}
+                  </p>
                 </blockquote>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                     <span className="text-sm font-medium">
-                      {testimonial.name ? testimonial.name.charAt(0) : testimonial.author ? testimonial.author.charAt(0) : ""}
+                      {testimonial.name
+                        ? testimonial.name.charAt(0)
+                        : testimonial.author
+                        ? testimonial.author.charAt(0)
+                        : ""}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium">{testimonial.name || testimonial.author}</p>
-                    {((testimonial.position || testimonial.role) || testimonial.company) && (
+                    <p className="font-medium">
+                      {testimonial.name || testimonial.author}
+                    </p>
+                    {((testimonial.position || testimonial.role) ||
+                      testimonial.company) && (
                       <p className="text-xs text-muted-foreground">
                         {testimonial.position || testimonial.role}
-                        {(testimonial.position || testimonial.role) && testimonial.company && ", "}
+                        {(testimonial.position || testimonial.role) &&
+                          testimonial.company &&
+                          ", "}
                         {testimonial.company}
                       </p>
                     )}
