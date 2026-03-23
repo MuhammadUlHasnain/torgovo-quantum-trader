@@ -1,6 +1,6 @@
 // API Configuration
-export const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
-export const WS_BASE_URL = process.env.REACT_APP_WS_URL || 'ws://localhost:8000/ws';
+export const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api';
+export const WS_BASE_URL = (import.meta as any).env?.VITE_WS_URL || 'ws://localhost:8000/ws';
 
 // API Client with interceptors
 class ApiClient {
