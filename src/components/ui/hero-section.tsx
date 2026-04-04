@@ -41,73 +41,46 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     const ctx = gsap.context(() => {
       // Title animation
       if (titleRef.current) {
-        gsap.from(titleRef.current, {
-          y: 80,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power4.out",
-          delay: 0.2,
-        });
+        gsap.fromTo(titleRef.current,
+          { y: 80, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, ease: "power4.out", delay: 0.2 }
+        );
       }
 
-      // Subtitle parallax - moves slower on scroll
+      // Subtitle
       if (subtitleRef.current) {
-        gsap.from(subtitleRef.current, {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          delay: 0.5,
-        });
+        gsap.fromTo(subtitleRef.current,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
+        );
 
         gsap.to(subtitleRef.current, {
-          yPercent: 20,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
+          yPercent: 20, ease: "none",
+          scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
         });
       }
 
-      // Title moves up faster on scroll (parallax separation)
+      // Title parallax
       if (titleRef.current) {
         gsap.to(titleRef.current, {
-          yPercent: -30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
+          yPercent: -30, ease: "none",
+          scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
         });
       }
 
       // Actions fade in
       if (actionsRef.current) {
-        gsap.from(actionsRef.current, {
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: 0.8,
-        });
+        gsap.fromTo(actionsRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.8 }
+        );
       }
 
       // Background parallax
       if (bgRef.current) {
         gsap.to(bgRef.current, {
-          yPercent: 50,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
+          yPercent: 50, ease: "none",
+          scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
         });
       }
     }, sectionRef);
