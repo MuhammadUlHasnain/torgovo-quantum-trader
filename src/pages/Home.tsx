@@ -199,6 +199,14 @@ const Home = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const ctaBgRef = useRef<HTMLDivElement>(null);
 
+  // Refresh ScrollTrigger after all components mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -225,7 +233,6 @@ const Home = () => {
           y: 80,
           opacity: 0,
           scale: 0.5,
-          filter: "blur(10px)",
           duration: 1,
           stagger: 0.15,
           ease: "power3.out",
