@@ -15,11 +15,8 @@ const DashboardLayout = () => {
         </Sidebar>
         
         <SidebarInset>
-          <div className="relative w-full">
+          <div className="relative w-full h-14 flex items-center">
             <FloatingSidebarToggle />
-            <div className="flex items-center pl-20 pt-2 pb-2 py-[21px]">
-              {/* Content header can go here */}
-            </div>
           </div>
           <div className="flex-1 p-4 md:p-6 relative z-0 theme-transition">
             <Outlet />
