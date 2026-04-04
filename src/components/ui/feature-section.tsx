@@ -82,40 +82,54 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
-      if (headerRef.current) {
-        gsap.from(headerRef.current, {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
+    // Small delay to ensure layout is calculated
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        if (headerRef.current) {
+          gsap.fromTo(headerRef.current, 
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
 
-      if (gridRef.current) {
-        gsap.from(gridRef.current.children, {
-          y: 80,
-          opacity: 0,
-          scale: 0.85,
-          filter: "blur(8px)",
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    });
+        if (gridRef.current) {
+          gsap.fromTo(gridRef.current.children,
+            { y: 80, opacity: 0, scale: 0.85 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.12,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: gridRef.current,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
+      });
 
-    return () => ctx.revert();
+      ctxRef.current = ctx;
+    }, 50);
+
+    let ctxRef = { current: null as gsap.Context | null };
+    return () => {
+      clearTimeout(timer);
+      ctxRef.current?.revert();
+    };
   }, []);
 
   return (

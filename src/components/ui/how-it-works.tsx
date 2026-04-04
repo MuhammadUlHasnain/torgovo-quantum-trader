@@ -32,38 +32,33 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
-      if (headerRef.current) {
-        gsap.from(headerRef.current, {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        if (headerRef.current) {
+          gsap.fromTo(headerRef.current,
+            { y: 40, opacity: 0 },
+            {
+              y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+              scrollTrigger: { trigger: headerRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
 
-      if (stepsRef.current) {
-        gsap.from(stepsRef.current.children, {
-          x: -60,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: stepsRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    });
+        if (stepsRef.current) {
+          gsap.fromTo(stepsRef.current.children,
+            { x: -60, opacity: 0 },
+            {
+              x: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out",
+              scrollTrigger: { trigger: stepsRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
+      });
+      ctxRef.current = ctx;
+    }, 50);
 
-    return () => ctx.revert();
+    let ctxRef = { current: null as gsap.Context | null };
+    return () => { clearTimeout(timer); ctxRef.current?.revert(); };
   }, []);
 
   return (

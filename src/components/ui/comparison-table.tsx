@@ -36,38 +36,33 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
-      if (headerRef.current) {
-        gsap.from(headerRef.current, {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        if (headerRef.current) {
+          gsap.fromTo(headerRef.current,
+            { y: 40, opacity: 0 },
+            {
+              y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+              scrollTrigger: { trigger: headerRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
 
-      if (tableRef.current) {
-        gsap.from(tableRef.current, {
-          y: 60,
-          opacity: 0,
-          scale: 0.95,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: tableRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    });
+        if (tableRef.current) {
+          gsap.fromTo(tableRef.current,
+            { y: 60, opacity: 0, scale: 0.95 },
+            {
+              y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out",
+              scrollTrigger: { trigger: tableRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
+      });
+      ctxRef.current = ctx;
+    }, 50);
 
-    return () => ctx.revert();
+    let ctxRef = { current: null as gsap.Context | null };
+    return () => { clearTimeout(timer); ctxRef.current?.revert(); };
   }, []);
 
   return (
