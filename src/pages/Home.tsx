@@ -210,71 +210,55 @@ const Home = () => {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
-      // Stats section reveal
-      if (statsRef.current) {
-        gsap.from(statsRef.current.children, {
-          y: 40,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: "top 90%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        // Stats section reveal
+        if (statsRef.current) {
+          gsap.fromTo(statsRef.current.children,
+            { y: 40, opacity: 0 },
+            {
+              y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power3.out",
+              scrollTrigger: { trigger: statsRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
 
-      // Bot cards emerge from depth
-      if (botsRef.current) {
-        gsap.from(botsRef.current.children, {
-          y: 80,
-          opacity: 0,
-          scale: 0.5,
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: botsRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
+        // Bot cards emerge from depth
+        if (botsRef.current) {
+          gsap.fromTo(botsRef.current.children,
+            { y: 80, opacity: 0, scale: 0.5 },
+            {
+              y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.15, ease: "power3.out",
+              scrollTrigger: { trigger: botsRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
 
-      // CTA depth shift background
-      if (ctaBgRef.current && ctaRef.current) {
-        gsap.to(ctaBgRef.current, {
-          yPercent: -15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
+        // CTA depth shift background
+        if (ctaBgRef.current && ctaRef.current) {
+          gsap.to(ctaBgRef.current, {
+            yPercent: -15, ease: "none",
+            scrollTrigger: { trigger: ctaRef.current, start: "top bottom", end: "bottom top", scrub: true },
+          });
+        }
 
-      // CTA content reveal
-      if (ctaRef.current) {
-        gsap.from(ctaRef.current.querySelector(".cta-content"), {
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    });
+        // CTA content reveal
+        if (ctaRef.current) {
+          gsap.fromTo(ctaRef.current.querySelector(".cta-content"),
+            { y: 50, opacity: 0 },
+            {
+              y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+              scrollTrigger: { trigger: ctaRef.current, start: "top 90%", toggleActions: "play none none none" },
+            }
+          );
+        }
+      });
 
-    return () => ctx.revert();
+      ctxRef.current = ctx;
+    }, 50);
+
+    let ctxRef = { current: null as gsap.Context | null };
+    return () => { clearTimeout(timer); ctxRef.current?.revert(); };
   }, []);
 
   return (
