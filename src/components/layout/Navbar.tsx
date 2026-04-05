@@ -186,10 +186,10 @@ const Navbar = () => {
   );
 };
 
-const navigationItemClass = "group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50";
+const navigationItemClass = "group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium link-3d hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50";
 
-const navigationCardClass = "block w-full select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground";
+const navigationCardClass = "block w-full select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none nav-card-3d hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground";
 
-const navigationDropdownItemClass = "relative block w-full rounded-md px-4 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground";
+const navigationDropdownItemClass = "relative block w-full rounded-md px-4 py-2 text-sm nav-card-3d hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground";
 
 export default Navbar;

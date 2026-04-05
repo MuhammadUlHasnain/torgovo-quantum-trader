@@ -23,7 +23,7 @@ const PricingCard = React.forwardRef<HTMLDivElement, PricingCardProps>(
       <div
         ref={ref}
         className={cn(
-          "relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/30",
+          "relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/30 pricing-3d",
           tier.popular
             ? "border-torgovo-purple glow-border scale-[1.02] z-10"
             : "border-border",

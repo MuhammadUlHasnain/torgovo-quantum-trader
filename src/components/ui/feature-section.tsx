@@ -161,7 +161,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
               className="group glass-card p-6 transition-all duration-200 hover:border-torgovo-purple/40 hover:shadow-md"
             >
               {feature.icon && (
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-torgovo-purple/10 text-torgovo-purple group-hover:bg-torgovo-purple/20">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-torgovo-purple/10 text-torgovo-purple group-hover:bg-torgovo-purple/20 icon-3d">
                   {feature.icon}
                 </div>
               )}
