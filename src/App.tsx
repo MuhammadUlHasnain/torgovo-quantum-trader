@@ -36,6 +36,8 @@ import InvestInBot from "./pages/dashboard/InvestInBot";
 import CreateCustomBot from "./pages/dashboard/CreateCustomBot";
 import Withdrawals from "./pages/dashboard/Withdrawals";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import CustomCursor from "./components/effects/CustomCursor";
+import ScrollReveal from "./components/effects/ScrollReveal";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <ScrollReveal />
+          <CustomCursor />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/grid-bots" element={<GridBots />} />
