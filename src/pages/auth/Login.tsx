@@ -40,8 +40,8 @@ const Login = () => {
   });
 
   const onSubmit = (values: LoginFormValues) => {
-    // Here we would typically make an API call to authenticate the user
-    console.log("Login form values:", values);
+    // Here we would typically make an API call to authenticate the user.
+    // Never log credentials — even in development.
     toast.success("Login successful!");
     // Redirect to dashboard after successful login
     // window.location.href = "/dashboard";
