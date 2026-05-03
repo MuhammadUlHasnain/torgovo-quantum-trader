@@ -35,6 +35,7 @@ import Support from "./pages/dashboard/Support";
 import InvestInBot from "./pages/dashboard/InvestInBot";
 import CreateCustomBot from "./pages/dashboard/CreateCustomBot";
 import Withdrawals from "./pages/dashboard/Withdrawals";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -64,17 +65,19 @@ const App = () => (
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/signup" element={<Signup />} />
             
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<DashboardHome />} />
-              <Route path="bots" element={<BotManagement />} />
-              <Route path="exchanges" element={<ExchangeConnections />} />
-              <Route path="settings" element={<UserSettings />} />
-              <Route path="analytics" element={<Analytics />} />
-              <Route path="create-bot" element={<CreateBot />} />
-              <Route path="support" element={<Support />} />
-              <Route path="invest-in-bot" element={<InvestInBot />} />
-              <Route path="create-custom-bot" element={<CreateCustomBot />} />
-              <Route path="withdrawals" element={<Withdrawals />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route index element={<DashboardHome />} />
+                <Route path="bots" element={<BotManagement />} />
+                <Route path="exchanges" element={<ExchangeConnections />} />
+                <Route path="settings" element={<UserSettings />} />
+                <Route path="analytics" element={<Analytics />} />
+                <Route path="create-bot" element={<CreateBot />} />
+                <Route path="support" element={<Support />} />
+                <Route path="invest-in-bot" element={<InvestInBot />} />
+                <Route path="create-custom-bot" element={<CreateCustomBot />} />
+                <Route path="withdrawals" element={<Withdrawals />} />
+              </Route>
             </Route>
             
             <Route path="*" element={<NotFound />} />
