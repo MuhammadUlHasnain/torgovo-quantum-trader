@@ -85,8 +85,8 @@ const Signup = () => {
   };
 
   const onSubmit = (values: SignupFormValues) => {
-    // Here we would typically make an API call to register the user
-    console.log("Signup form values:", values);
+    // Here we would typically make an API call to register the user.
+    // Never log credentials — even in development.
     toast.success("Account created successfully! Please check your email for verification.");
     // Redirect or show verification screen
   };
