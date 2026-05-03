@@ -1,3 +1,5 @@
+import { clearAuthToken, getAuthToken } from "./authToken";
+
 // API Configuration
 export const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api';
 export const WS_BASE_URL = (import.meta as any).env?.VITE_WS_URL || 'ws://localhost:8000/ws';
@@ -11,7 +13,7 @@ class ApiClient {
   }
 
   private getHeaders(): HeadersInit {
-    const token = localStorage.getItem('authToken');
+    const token = getAuthToken();
     return {
       'Content-Type': 'application/json',
       ...(token && { 'Authorization': `Bearer ${token}` }),
@@ -21,7 +23,7 @@ class ApiClient {
   private async handleResponse(response: Response) {
     if (!response.ok) {
       if (response.status === 401) {
-        localStorage.removeItem('authToken');
+        clearAuthToken();
         window.location.href = '/login';
       }
       const error = await response.json().catch(() => ({ error: { message: 'An error occurred' } }));
