@@ -14,6 +14,7 @@ import MartingaleBots from "./pages/MartingaleBots";
 import Tutorial from "./pages/Tutorial";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
+import Terms from "./pages/Terms";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/Login";
@@ -60,6 +61,7 @@ const App = () => (
             <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<About />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/help-support" element={<HelpSupport />} />
