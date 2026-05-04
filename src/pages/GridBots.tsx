@@ -17,8 +17,8 @@ const GridBots = () => {
   return (
     <Layout>
       <HeroSection
-        heroTitle="AI Powered Grid Bot"
-        subtitle="Automate your trading with advanced AI-powered grid strategies that work in any market condition."
+        heroTitle="QuantumAI Bot"
+        subtitle="Automate your trading with advanced QuantumAI grid strategies that work in any market condition."
       >
         <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
           <Link to="/dashboard/invest-in-bot?type=ai_grid">Invest Now</Link>
@@ -253,7 +253,7 @@ const GridBots = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-              Create AI Powered Grid Bot
+              Create QuantumAI Bot
             </Button>
             <Button variant="outline" className="flex items-center gap-2">
               View Tutorial <ArrowRight className="h-4 w-4" />

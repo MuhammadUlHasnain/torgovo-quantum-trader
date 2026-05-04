@@ -95,7 +95,6 @@ const ExchangeConnections = () => {
               </p>
               <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5 space-y-1">
                 <li>Only enable trading permissions, not withdrawal permissions</li>
-                <li>Set IP restrictions to only allow access from your trusted IP addresses</li>
                 <li>Use unique API keys for each platform or service</li>
                 <li>Regularly rotate your API keys to enhance security</li>
               </ul>

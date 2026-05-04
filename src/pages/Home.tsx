@@ -307,9 +307,9 @@ const Home = () => {
         features={[
           {
             icon: <Bot className="h-6 w-6" />,
-            title: "Custom Bot Creation",
+            title: "Signal Bot Creation",
             description:
-              "Create your own trading bots with our intuitive interface and receive a webhook script for easy integration.",
+              "Create your own Signal trading bots with our intuitive interface and receive a webhook script for easy integration.",
           },
           {
             icon: <ChartBar className="h-6 w-6" />,

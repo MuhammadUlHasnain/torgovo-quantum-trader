@@ -19,7 +19,7 @@ const FuturesBots = () => {
         subtitle="Automated bots that trade futures contracts with leverage and precision."
       >
         <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
-          <Link to="/pricing?type=custom">Subscribe Now</Link>
+          <Link to="/pricing?type=signal">Subscribe Now</Link>
         </Button>
       </HeroSection>
 

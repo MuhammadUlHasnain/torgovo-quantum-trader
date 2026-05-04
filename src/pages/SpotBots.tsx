@@ -20,7 +20,7 @@ const SpotBots = () => {
         subtitle="Automated bots that trade spot markets with precision and efficiency."
       >
         <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
-          <Link to="/pricing?type=custom">Subscribe Now</Link>
+          <Link to="/pricing?type=signal">Subscribe Now</Link>
         </Button>
       </HeroSection>
       

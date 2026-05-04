@@ -38,9 +38,9 @@ const MANAGED_BOTS = {
     total_subscribers: 189,
   },
   ai_grid: {
-    name: "AI-Powered Grid Bot",
+    name: "QuantumAI Bot",
     type: "ai_grid",
-    description: "Advanced AI-driven grid trading with machine learning optimization",
+    description: "Advanced QuantumAI grid trading with machine learning optimization",
     min_investment: "500",
     guaranteed_return: "10-15%",
     performance_30d: "+18.7%",
