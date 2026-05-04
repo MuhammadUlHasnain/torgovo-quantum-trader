@@ -7,6 +7,7 @@ import { AlertCircle, ArrowRight, Check } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
 import ComparisonTable from "@/components/ui/comparison-table";
 import { botComparisonFeatures } from "@/components/ui/comparison-data";
+import MartingaleTradingVisual from "@/components/trading/MartingaleTradingVisual";
 import { Link } from "react-router-dom";
 
 const MartingaleBots = () => {
@@ -68,6 +69,10 @@ const MartingaleBots = () => {
               </ol>
             </div>
           </div>
+        </div>
+
+        <div className="mb-12 glass-card p-6">
+          <MartingaleTradingVisual />
         </div>
         
         <Card className="mb-12">
