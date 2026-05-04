@@ -11,7 +11,7 @@ import { Copy, CheckCircle2, AlertCircle, ArrowLeft, Eye, EyeOff, Zap } from "lu
 import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 
-const CreateCustomBot = () => {
+const CreateSignalBot = () => {
   const navigate = useNavigate();
   const [botType, setBotType] = useState<'spot' | 'futures'>('spot');
   const [botName, setBotName] = useState("");
@@ -25,7 +25,7 @@ const CreateCustomBot = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [createdBot, setCreatedBot] = useState<any>(null);
 
-  const exchanges = ['binance', 'bybit', 'kraken', 'mexc', 'okx'];
+  const exchanges = ['binance', 'bybit', 'mexc', 'okx', 'kucoin', 'bitget'];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const CreateCustomBot = () => {
     setTimeout(() => {
       const systemId = `${Math.random().toString(36).substr(2, 6)}-${Math.random().toString(36).substr(2, 6)}-${Math.random().toString(36).substr(2, 5)}`.toUpperCase();
       const webhookSecret = Math.random().toString(36).substr(2, 20);
-      const webhookUrl = `http://localhost:8000/api/custom-bot/webhook/receive/${webhookSecret}/`;
+      const webhookUrl = `http://localhost:8000/api/signal-bot/webhook/receive/${webhookSecret}/`;
 
       const botData = {
         id: systemId,
@@ -65,7 +65,7 @@ const CreateCustomBot = () => {
 
       setCreatedBot(botData);
       setIsCreating(false);
-      toast.success("Custom bot created successfully!");
+      toast.success("Signal bot created successfully!");
     }, 1500);
   };
 
@@ -83,7 +83,7 @@ const CreateCustomBot = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Bot Created Successfully</h1>
-            <p className="text-muted-foreground">Your custom {botType} trading bot is ready</p>
+            <p className="text-muted-foreground">Your Signal {botType} trading bot is ready</p>
           </div>
         </div>
 
@@ -213,7 +213,7 @@ const CreateCustomBot = () => {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Create Custom Trading Bot</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Create Signal Trading Bot</h1>
           <p className="text-muted-foreground">Connect your TradingView strategy to automated trading</p>
         </div>
       </div>
@@ -222,7 +222,7 @@ const CreateCustomBot = () => {
         <CardHeader>
           <CardTitle>Bot Configuration</CardTitle>
           <CardDescription>
-            Configure your custom bot to execute TradingView alerts
+            Configure your Signal bot to execute TradingView alerts
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -400,4 +400,4 @@ const CreateCustomBot = () => {
   );
 };
 
-export default CreateCustomBot;
+export default CreateSignalBot;
