@@ -19,7 +19,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import InvestmentBots from "./pages/InvestmentBots";
-import CustomBots from "./pages/CustomBots";
+import SignalBots from "./pages/SignalBots";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import BotManagement from "./pages/dashboard/BotManagement";
 import ExchangeConnections from "./pages/dashboard/ExchangeConnections";
@@ -33,7 +33,7 @@ import ScrollToTop from "./components/layout/ScrollToTop";
 import CreateBot from "./pages/dashboard/CreateBot";
 import Support from "./pages/dashboard/Support";
 import InvestInBot from "./pages/dashboard/InvestInBot";
-import CreateCustomBot from "./pages/dashboard/CreateCustomBot";
+import CreateSignalBot from "./pages/dashboard/CreateSignalBot";
 import Withdrawals from "./pages/dashboard/Withdrawals";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import CustomCursor from "./components/effects/CustomCursor";
@@ -64,7 +64,9 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/help-support" element={<HelpSupport />} />
             <Route path="/investment-bots" element={<InvestmentBots />} />
-            <Route path="/custom-bots" element={<CustomBots />} />
+            <Route path="/signal-bots" element={<SignalBots />} />
+            {/* Backwards-compatibility redirect for old /custom-bots URLs */}
+            <Route path="/custom-bots" element={<SignalBots />} />
             
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/signup" element={<Signup />} />
@@ -79,7 +81,8 @@ const App = () => (
                 <Route path="create-bot" element={<CreateBot />} />
                 <Route path="support" element={<Support />} />
                 <Route path="invest-in-bot" element={<InvestInBot />} />
-                <Route path="create-custom-bot" element={<CreateCustomBot />} />
+                <Route path="create-signal-bot" element={<CreateSignalBot />} />
+                <Route path="create-custom-bot" element={<CreateSignalBot />} />
                 <Route path="withdrawals" element={<Withdrawals />} />
               </Route>
             </Route>
