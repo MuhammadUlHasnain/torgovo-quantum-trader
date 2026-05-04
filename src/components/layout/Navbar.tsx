@@ -42,10 +42,10 @@ const Navbar = () => {
                     <Link to="/grid-bots">
                       <NavigationMenuLink className={cn(navigationCardClass)}>
                         <div className="mb-2 mt-4 text-lg font-medium text-torgovo-blue">
-                          AI Powered Grid Bot
+                          QuantumAI Bot
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Managed AI-powered grid strategies
+                          Managed QuantumAI grid strategies
                         </p>
                       </NavigationMenuLink>
                     </Link>
@@ -99,13 +99,13 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/custom-bots">
+                    <Link to="/signal-bots">
                       <NavigationMenuLink className={cn(navigationCardClass)}>
                         <div className="mb-2 mt-4 text-lg font-medium text-torgovo-purple">
-                          🔧 Custom Bots
+                          📡 Signal Bots
                         </div>
                         <p className="text-sm leading-tight text-muted-foreground">
-                          Create your own TradingView bots
+                          Create your own TradingView Signal bots
                         </p>
                       </NavigationMenuLink>
                     </Link>

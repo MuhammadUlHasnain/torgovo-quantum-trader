@@ -95,7 +95,6 @@ const ExchangeConnections = () => {
               </p>
               <ul className="mt-2 text-sm text-muted-foreground list-disc pl-5 space-y-1">
                 <li>Only enable trading permissions, not withdrawal permissions</li>
-                <li>Set IP restrictions to only allow access from your trusted IP addresses</li>
                 <li>Use unique API keys for each platform or service</li>
                 <li>Regularly rotate your API keys to enhance security</li>
               </ul>
@@ -279,9 +278,6 @@ const ExchangeConnections = () => {
                   Create a new API key and set the appropriate permissions (read info, spot trading)
                 </li>
                 <li className="text-sm text-muted-foreground">
-                  Enable IP restrictions if available for enhanced security
-                </li>
-                <li className="text-sm text-muted-foreground">
                   Save your API Key and Secret Key in a secure location
                 </li>
               </ol>
@@ -331,7 +327,7 @@ const ExchangeConnections = () => {
                     <th className="text-left py-2">Exchange</th>
                     <th className="text-center py-2">GRID Bots</th>
                     <th className="text-center py-2">Martingale Bots</th>
-                    <th className="text-center py-2">Custom Bots</th>
+                    <th className="text-center py-2">Signal Bots</th>
                   </tr>
                 </thead>
                 <tbody>

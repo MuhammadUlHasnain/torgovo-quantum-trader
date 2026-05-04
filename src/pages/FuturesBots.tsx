@@ -9,6 +9,7 @@ import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import FuturesTradingVisual from "@/components/trading/FuturesTradingVisual";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { botComparisonFeatures } from "@/components/ui/comparison-data";
 import { Link } from "react-router-dom";
 
 const FuturesBots = () => {
@@ -19,7 +20,7 @@ const FuturesBots = () => {
         subtitle="Automated bots that trade futures contracts with leverage and precision."
       >
         <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
-          <Link to="/pricing?type=custom">Subscribe Now</Link>
+          <Link to="/pricing?type=signal">Subscribe Now</Link>
         </Button>
       </HeroSection>
 
@@ -199,45 +200,9 @@ const FuturesBots = () => {
       
       <ComparisonTable
         title="Bot Type Comparison"
-        subtitle="See how our Futures Bot compares with other trading strategies"
-        competitors={["Spot Bots", "Martingale Bots", "AI Powered Grid Bot"]}
-        features={[
-          {
-            name: "Risk Level",
-            aiGridBot: "High",
-            competitor1: "Low",
-            competitor2: "Medium-High", 
-            competitor3: "Low-Medium"
-          },
-          {
-            name: "Capital Efficiency",
-            aiGridBot: "High",
-            competitor1: "Low",
-            competitor2: "Medium",
-            competitor3: "Medium"
-          },
-          {
-            name: "Profit from Volatility",
-            aiGridBot: true,
-            competitor1: false,
-            competitor2: true,
-            competitor3: true
-          },
-          {
-            name: "Suitable for Trending Markets",
-            aiGridBot: true,
-            competitor1: false,
-            competitor2: false,
-            competitor3: false
-          },
-          {
-            name: "Technical Knowledge Required",
-            aiGridBot: "High",
-            competitor1: "Low",
-            competitor2: "Medium",
-            competitor3: "Medium"
-          }
-        ]}
+        subtitle="See how our Signal Bot compares with other trading strategies"
+        highlight="signal"
+        features={botComparisonFeatures}
         className="mt-16 container mb-12"
       />
     </Layout>

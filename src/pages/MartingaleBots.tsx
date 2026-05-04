@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertCircle, ArrowRight, Check } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { botComparisonFeatures } from "@/components/ui/comparison-data";
+import MartingaleTradingVisual from "@/components/trading/MartingaleTradingVisual";
 import { Link } from "react-router-dom";
 
 const MartingaleBots = () => {
@@ -67,6 +69,10 @@ const MartingaleBots = () => {
               </ol>
             </div>
           </div>
+        </div>
+
+        <div className="mb-12 glass-card p-6">
+          <MartingaleTradingVisual />
         </div>
         
         <Card className="mb-12">
@@ -188,44 +194,8 @@ const MartingaleBots = () => {
         <ComparisonTable
           title="Bot Type Comparison"
           subtitle="See how our Martingale Bot compares with other trading strategies"
-          competitors={["Spot Bots", "Futures Bots", "AI Powered Grid Bot"]}
-          features={[
-            {
-              name: "Risk Management",
-              aiGridBot: "Medium-High",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            },
-            {
-              name: "Profit Recovery",
-              aiGridBot: true,
-              competitor1: false,
-              competitor2: false,
-              competitor3: true
-            },
-            {
-              name: "Market Condition",
-              aiGridBot: "Trending",
-              competitor1: "Any",
-              competitor2: "Any",
-              competitor3: "Ranging"
-            },
-            {
-              name: "Capital Efficiency",
-              aiGridBot: "High",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            },
-            {
-              name: "Technical Knowledge Required",
-              aiGridBot: "High",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            }
-          ]}
+          highlight="martingale"
+          features={botComparisonFeatures}
           className="mt-16 container mb-12"
         />
         

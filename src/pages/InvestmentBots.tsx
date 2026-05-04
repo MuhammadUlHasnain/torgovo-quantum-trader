@@ -17,9 +17,9 @@ const InvestmentBots = () => {
 
   const managedBots = [
     {
-      name: "AI Powered Grid Bot",
+      name: "QuantumAI Bot",
       type: "ai_grid",
-      description: "Advanced AI-powered grid trading that adapts to market conditions",
+      description: "Advanced QuantumAI grid trading that adapts to market conditions",
       minInvestment: "$100",
       expectedReturn: "12-18% monthly",
       riskLevel: "Medium",

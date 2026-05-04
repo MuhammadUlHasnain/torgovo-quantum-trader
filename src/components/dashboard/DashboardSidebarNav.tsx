@@ -48,10 +48,10 @@ const DashboardSidebarNav = () => {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Create Custom Bot">
-              <a href="/dashboard/create-custom-bot">
+            <SidebarMenuButton asChild tooltip="Create Signal Bot">
+              <a href="/dashboard/create-signal-bot">
                 <PlusCircle />
-                <span>Create Custom Bot</span>
+                <span>Create Signal Bot</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

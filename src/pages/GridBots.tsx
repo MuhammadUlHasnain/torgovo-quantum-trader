@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
 import { Link } from "react-router-dom";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { botComparisonFeatures } from "@/components/ui/comparison-data";
 import BotTabs from "@/components/trading/BotTabs";
 import GridTradingVisual from "@/components/trading/GridTradingVisual";
 import BotFaqSection from "@/components/trading/BotFaqSection";
@@ -17,8 +18,8 @@ const GridBots = () => {
   return (
     <Layout>
       <HeroSection
-        heroTitle="AI Powered Grid Bot"
-        subtitle="Automate your trading with advanced AI-powered grid strategies that work in any market condition."
+        heroTitle="QuantumAI Bot"
+        subtitle="Automate your trading with advanced QuantumAI grid strategies that work in any market condition."
       >
         <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
           <Link to="/dashboard/invest-in-bot?type=ai_grid">Invest Now</Link>
@@ -253,7 +254,7 @@ const GridBots = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button className="bg-torgovo-blue hover:bg-torgovo-blue/80">
-              Create AI Powered Grid Bot
+              Create QuantumAI Bot
             </Button>
             <Button variant="outline" className="flex items-center gap-2">
               View Tutorial <ArrowRight className="h-4 w-4" />
@@ -263,45 +264,9 @@ const GridBots = () => {
         
         <ComparisonTable
           title="Bot Type Comparison"
-          subtitle="See how our AI Powered Grid Bot compares with other trading strategies"
-          competitors={["Spot Bots", "Futures Bots", "Martingale Bots"]}
-          features={[
-            {
-              name: "Suitable for Sideways Markets",
-              aiGridBot: true,
-              competitor1: false,
-              competitor2: true,
-              competitor3: true
-            },
-            {
-              name: "Profit from Volatility",
-              aiGridBot: true,
-              competitor1: false,
-              competitor2: true,
-              competitor3: true
-            },
-            {
-              name: "Risk Level",
-              aiGridBot: "Low-Medium",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium-High"
-            },
-            {
-              name: "Capital Efficiency",
-              aiGridBot: "Medium",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            },
-            {
-              name: "Technical Knowledge Required",
-              aiGridBot: "Medium",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            }
-          ]}
+          subtitle="See how our Grid Bot compares with other trading strategies"
+          highlight="grid"
+          features={botComparisonFeatures}
           className="mt-16"
         />
       </div>

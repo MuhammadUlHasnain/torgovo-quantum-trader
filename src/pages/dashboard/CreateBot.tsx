@@ -72,14 +72,14 @@ const CreateBot = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>AI Grid Bot</CardTitle>
+                  <CardTitle>QuantumAI Bot</CardTitle>
                   <CardDescription>
-                    AI-powered grid strategy with automatic parameter optimization.
+                    QuantumAI grid strategy with automatic parameter optimization.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Our AI Grid Bot uses machine learning to optimize grid parameters and adapt to changing market conditions.
+                    Our QuantumAI Bot uses machine learning to optimize grid parameters and adapt to changing market conditions.
                   </p>
                   <ul className="text-sm space-y-2 mb-6">
                     <li className="flex items-center gap-2">
@@ -95,7 +95,7 @@ const CreateBot = () => {
                       <span>Performance analytics and optimization</span>
                     </li>
                   </ul>
-                  <Button className="w-full bg-torgovo-purple hover:bg-torgovo-purple/80">Create AI Grid Bot</Button>
+                  <Button className="w-full bg-torgovo-purple hover:bg-torgovo-purple/80">Create QuantumAI Bot</Button>
                 </CardContent>
               </Card>
             </div>
