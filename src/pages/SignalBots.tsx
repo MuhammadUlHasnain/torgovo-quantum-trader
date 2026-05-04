@@ -6,83 +6,42 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CheckCircle2, Webhook, LineChart, Settings, Zap, Code, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const CustomBots = () => {
+const SignalBots = () => {
   const tradingViewSteps = [
-    {
-      step: "1",
-      title: "Create Your Bot",
-      description: "Set up your custom bot with exchange API keys and trading parameters",
-    },
-    {
-      step: "2",
-      title: "Get Webhook URL",
-      description: "System generates unique webhook URL and TradingView JSON for you",
-    },
-    {
-      step: "3",
-      title: "Set Up Alerts",
-      description: "Configure TradingView alerts with your webhook URL and JSON payload",
-    },
-    {
-      step: "4",
-      title: "Auto Trading",
-      description: "Bot executes trades automatically based on TradingView signals",
-    },
+    { step: "1", title: "Create Your Bot", description: "Set up your Signal bot with exchange API keys and trading parameters" },
+    { step: "2", title: "Get Webhook URL", description: "System generates unique webhook URL and TradingView JSON for you" },
+    { step: "3", title: "Set Up Alerts", description: "Configure TradingView alerts with your webhook URL and JSON payload" },
+    { step: "4", title: "Auto Trading", description: "Bot executes trades automatically based on TradingView signals" },
   ];
 
   const features = [
-    {
-      icon: Webhook,
-      title: "TradingView Integration",
-      description: "Seamlessly connect your TradingView alerts to execute trades automatically",
-    },
-    {
-      icon: Zap,
-      title: "Instant Execution",
-      description: "Lightning-fast trade execution when alerts trigger",
-    },
-    {
-      icon: Settings,
-      title: "Customizable Parameters",
-      description: "Full control over trade size, exchange, and risk management",
-    },
-    {
-      icon: Code,
-      title: "JSON Configuration",
-      description: "Simple JSON format for easy TradingView alert setup",
-    },
-    {
-      icon: BarChart3,
-      title: "Real-time Tracking",
-      description: "Monitor all trades and performance in your dashboard",
-    },
-    {
-      icon: LineChart,
-      title: "Multiple Exchanges",
-      description: "Support for Binance, Bybit, MEXC, OKX, and more",
-    },
+    { icon: Webhook, title: "TradingView Integration", description: "Seamlessly connect your TradingView alerts to execute trades automatically" },
+    { icon: Zap, title: "Instant Execution", description: "Lightning-fast trade execution when alerts trigger" },
+    { icon: Settings, title: "Customizable Parameters", description: "Full control over trade size, exchange, and risk management" },
+    { icon: Code, title: "JSON Configuration", description: "Simple JSON format for easy TradingView alert setup" },
+    { icon: BarChart3, title: "Real-time Tracking", description: "Monitor all trades and performance in your dashboard" },
+    { icon: LineChart, title: "Multiple Exchanges", description: "Support for Binance, Bybit, MEXC, OKX, KuCoin, and Bitget" },
   ];
 
   return (
     <Layout>
       <HeroSection
-        heroTitle="Custom Trading Bots"
-        subtitle="Create your own trading bot with TradingView alerts. Full control, automated execution, real-time tracking."
+        heroTitle="Signal Trading Bots"
+        subtitle="Create your own Signal bot driven by TradingView alerts. Full control, automated execution, real-time tracking."
       >
         <div className="flex gap-4 flex-wrap justify-center">
           <Button className="bg-accent-primary hover:bg-accent-primary/90" asChild>
-            <Link to="/dashboard/create-custom-bot">Create Custom Bot</Link>
+            <Link to="/dashboard/create-signal-bot">Create Signal Bot</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/pricing?type=custom">View Pricing</Link>
+            <Link to="/pricing?type=signal">View Pricing</Link>
           </Button>
         </div>
       </HeroSection>
 
-      {/* How It Works */}
       <div className="container py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">How Custom Bots Work</h2>
+          <h2 className="text-3xl font-bold mb-4">How Signal Bots Work</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Connect your TradingView strategies to automated trading in 4 simple steps
           </p>
@@ -104,11 +63,10 @@ const CustomBots = () => {
           ))}
         </div>
 
-        {/* Bot Types */}
         <div className="grid gap-8 md:grid-cols-2 mb-16">
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle className="text-2xl text-torgovo-blue">SPOT Trading Bot</CardTitle>
+              <CardTitle className="text-2xl text-torgovo-blue">SPOT Signal Bot</CardTitle>
               <CardDescription>Perfect for straightforward buy/sell strategies</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -127,16 +85,14 @@ const CustomBots = () => {
                 ))}
               </ul>
               <Button className="w-full bg-torgovo-blue hover:bg-torgovo-blue/90" asChild>
-                <Link to="/dashboard/create-custom-bot?type=spot">
-                  Create SPOT Bot
-                </Link>
+                <Link to="/dashboard/create-signal-bot?type=spot">Create SPOT Signal Bot</Link>
               </Button>
             </CardContent>
           </Card>
 
           <Card className="glass-card">
             <CardHeader>
-              <CardTitle className="text-2xl text-torgovo-purple">FUTURES Trading Bot</CardTitle>
+              <CardTitle className="text-2xl text-torgovo-purple">FUTURES Signal Bot</CardTitle>
               <CardDescription>Advanced trading with leverage for experienced traders</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -155,15 +111,12 @@ const CustomBots = () => {
                 ))}
               </ul>
               <Button className="w-full bg-torgovo-purple hover:bg-torgovo-purple-dim" asChild>
-                <Link to="/dashboard/create-custom-bot?type=futures">
-                  Create FUTURES Bot
-                </Link>
+                <Link to="/dashboard/create-signal-bot?type=futures">Create FUTURES Signal Bot</Link>
               </Button>
             </CardContent>
           </Card>
         </div>
 
-        {/* Key Features */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center">Powerful Features</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -181,12 +134,11 @@ const CustomBots = () => {
           </div>
         </div>
 
-        {/* TradingView Setup Example */}
         <div className="glass-card p-8 mb-16">
           <h2 className="text-2xl font-bold mb-6">TradingView Alert Configuration</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground">
-              After creating your bot, you'll receive a webhook URL and JSON configuration. Here's what it looks like:
+              After creating your Signal bot, you'll receive a webhook URL and JSON configuration. Here's what it looks like:
             </p>
             <div className="bg-sidebar-accent rounded-lg p-6 space-y-4">
               <div>
@@ -211,7 +163,6 @@ const CustomBots = () => {
           </div>
         </div>
 
-        {/* Configuration Options */}
         <div className="glass-card p-8 mb-16">
           <h2 className="text-2xl font-bold mb-6">Bot Configuration Options</h2>
           <div className="grid gap-6 md:grid-cols-2">
@@ -219,7 +170,7 @@ const CustomBots = () => {
               <h3 className="text-lg font-semibold text-torgovo-purple">Trading Parameters</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>• Choose trading pair (BTC/USDT, ETH/USDT, etc.)</li>
-                <li>• Select exchange (Binance, Bybit, MEXC, OKX)</li>
+                <li>• Select exchange (Binance, Bybit, MEXC, OKX, KuCoin, Bitget)</li>
                 <li>• Set trade amount (percentage or fixed amount)</li>
                 <li>• Configure leverage for futures (1x-100x)</li>
                 <li>• Enable demo mode for testing</li>
@@ -231,53 +182,21 @@ const CustomBots = () => {
                 <li>• Secure API key storage</li>
                 <li>• API keys never exposed in webhooks</li>
                 <li>• Unique webhook secret for verification</li>
-                <li>• IP whitelist support (optional)</li>
                 <li>• Transaction logging and history</li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Video Tutorial */}
-        <div className="glass-card p-8 mb-16">
-          <h2 className="text-2xl font-bold mb-6 text-center">Video Tutorial</h2>
-          <div className="aspect-video bg-sidebar-accent rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <Webhook className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-              <p className="text-muted-foreground">Custom bot setup tutorial video coming soon</p>
-            </div>
-          </div>
-        </div>
-
-        {/* FAQ */}
         <div className="glass-card p-8">
           <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             {[
-              {
-                q: "Do I need a TradingView subscription?",
-                a: "Yes, you need at least a TradingView Pro subscription to use webhook alerts. Free TradingView accounts cannot send webhook notifications.",
-              },
-              {
-                q: "How secure are my API keys?",
-                a: "Your API keys are encrypted and stored securely. They are never exposed in webhooks or logs. We recommend using API keys with trading-only permissions (no withdrawal rights).",
-              },
-              {
-                q: "Can I test my bot before using real money?",
-                a: "Yes! All custom bots support demo mode where you can test your strategies with simulated trades before going live.",
-              },
-              {
-                q: "What exchanges are supported?",
-                a: "Currently we support Binance, Bybit, MEXC, OKX, and Kraken. More exchanges are being added regularly.",
-              },
-              {
-                q: "How many bots can I create?",
-                a: "The number of bots you can create depends on your subscription plan. Check our pricing page for details.",
-              },
-              {
-                q: "Can I modify my bot after creation?",
-                a: "Yes, you can update all bot parameters including API keys, trade amounts, and trading mode from your dashboard settings.",
-              },
+              { q: "Do I need a TradingView subscription?", a: "Yes, you need at least a TradingView Pro subscription to use webhook alerts. Free TradingView accounts cannot send webhook notifications." },
+              { q: "How secure are my API keys?", a: "Your API keys are encrypted and stored securely. They are never exposed in webhooks or logs. We recommend using API keys with trading-only permissions (no withdrawal rights)." },
+              { q: "Can I test my bot before using real money?", a: "Yes! All Signal bots support demo mode where you can test your strategies with simulated trades before going live." },
+              { q: "What exchanges are supported?", a: "Signal bots support Binance, Bybit, MEXC, OKX, KuCoin, and Bitget." },
+              { q: "How many bots can I create?", a: "The number of bots you can create depends on your subscription plan. Check our pricing page for details." },
             ].map((item, index) => (
               <div key={index} className="border-b border-border pb-4 last:border-0">
                 <h3 className="font-semibold mb-2 text-torgovo-purple">{item.q}</h3>
@@ -287,14 +206,13 @@ const CustomBots = () => {
           </div>
         </div>
 
-        {/* CTA */}
         <div className="text-center mt-16">
           <h2 className="text-3xl font-bold mb-4">Ready to Automate Your Trading?</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Create your custom bot in minutes and start executing trades automatically based on your TradingView strategies
+            Create your Signal bot in minutes and start executing trades automatically based on your TradingView strategies
           </p>
           <Button size="lg" className="bg-gradient-to-r from-torgovo-blue to-torgovo-purple hover:opacity-90" asChild>
-            <Link to="/dashboard/create-custom-bot">Get Started Now</Link>
+            <Link to="/dashboard/create-signal-bot">Get Started Now</Link>
           </Button>
         </div>
       </div>
@@ -302,4 +220,4 @@ const CustomBots = () => {
   );
 };
 
-export default CustomBots;
+export default SignalBots;
