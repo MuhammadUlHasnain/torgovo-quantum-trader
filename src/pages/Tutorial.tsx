@@ -147,9 +147,6 @@ const Tutorial = () => {
                         <span className="text-foreground">Enable trading permissions only (do not enable withdrawal)</span>
                       </li>
                       <li className="text-muted-foreground">
-                        <span className="text-foreground">Set IP restrictions to only allow access from your IP address</span>
-                      </li>
-                      <li className="text-muted-foreground">
                         <span className="text-foreground">Securely copy your API Key and Secret Key</span>
                       </li>
                     </ol>
@@ -168,9 +165,6 @@ const Tutorial = () => {
                       </li>
                       <li className="text-muted-foreground">
                         <span className="text-foreground">Set permissions to "Contract Trade" only</span>
-                      </li>
-                      <li className="text-muted-foreground">
-                        <span className="text-foreground">Configure IP restrictions for added security</span>
                       </li>
                       <li className="text-muted-foreground">
                         <span className="text-foreground">Safely store your API Key and Secret Key</span>
