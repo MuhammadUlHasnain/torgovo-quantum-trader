@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Home from "./pages/Home";
 import GridBots from "./pages/GridBots";
 import SpotBots from "./pages/SpotBots";
@@ -92,6 +93,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <SpeedInsights />
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
