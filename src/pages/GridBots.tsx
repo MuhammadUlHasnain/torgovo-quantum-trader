@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle2, AlertTriangle } from "lucide-react";
 import FeatureSection from "@/components/ui/feature-section";
 import { Link } from "react-router-dom";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { botComparisonFeatures } from "@/components/ui/comparison-data";
 import BotTabs from "@/components/trading/BotTabs";
 import GridTradingVisual from "@/components/trading/GridTradingVisual";
 import BotFaqSection from "@/components/trading/BotFaqSection";
@@ -265,7 +266,7 @@ const GridBots = () => {
           title="Bot Type Comparison"
           subtitle="See how our Grid Bot compares with other trading strategies"
           highlight="grid"
-          features={comparisonFeatures}
+          features={botComparisonFeatures}
           className="mt-16"
         />
       </div>

@@ -10,6 +10,7 @@ import BotTabs from "@/components/trading/BotTabs";
 import BotFaqSection from "@/components/trading/BotFaqSection";
 import SpotTradingVisual from "@/components/trading/SpotTradingVisual";
 import ComparisonTable from "@/components/ui/comparison-table";
+import { botComparisonFeatures } from "@/components/ui/comparison-data";
 import { Link } from "react-router-dom";
 
 const SpotBots = () => {
@@ -208,45 +209,9 @@ const SpotBots = () => {
         
         <ComparisonTable
           title="Bot Type Comparison"
-          subtitle="See how our Spot Bot compares with other trading strategies"
-          competitors={["Futures Bots", "Martingale Bots", "AI Powered Grid Bot"]}
-          features={[
-            {
-              name: "Risk Level",
-              aiGridBot: "Low",
-              competitor1: "High",
-              competitor2: "Medium-High",
-              competitor3: "Low-Medium"
-            },
-            {
-              name: "Capital Efficiency",
-              aiGridBot: "Low",
-              competitor1: "High",
-              competitor2: "Medium",
-              competitor3: "Medium"
-            },
-            {
-              name: "Profit from Volatility",
-              aiGridBot: false,
-              competitor1: true,
-              competitor2: true,
-              competitor3: true
-            },
-            {
-              name: "Suitable for Sideways Markets",
-              aiGridBot: false,
-              competitor1: false,
-              competitor2: true,
-              competitor3: true
-            },
-            {
-              name: "Technical Knowledge Required",
-              aiGridBot: "Low",
-              competitor1: "High",
-              competitor2: "Medium",
-              competitor3: "Medium"
-            }
-          ]}
+          subtitle="See how our Signal Bot compares with other trading strategies"
+          highlight="signal"
+          features={botComparisonFeatures}
           className="mt-16 container mb-12"
         />
         
