@@ -263,45 +263,9 @@ const GridBots = () => {
         
         <ComparisonTable
           title="Bot Type Comparison"
-          subtitle="See how our AI Powered Grid Bot compares with other trading strategies"
-          competitors={["Spot Bots", "Futures Bots", "Martingale Bots"]}
-          features={[
-            {
-              name: "Suitable for Sideways Markets",
-              aiGridBot: true,
-              competitor1: false,
-              competitor2: true,
-              competitor3: true
-            },
-            {
-              name: "Profit from Volatility",
-              aiGridBot: true,
-              competitor1: false,
-              competitor2: true,
-              competitor3: true
-            },
-            {
-              name: "Risk Level",
-              aiGridBot: "Low-Medium",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium-High"
-            },
-            {
-              name: "Capital Efficiency",
-              aiGridBot: "Medium",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            },
-            {
-              name: "Technical Knowledge Required",
-              aiGridBot: "Medium",
-              competitor1: "Low",
-              competitor2: "High",
-              competitor3: "Medium"
-            }
-          ]}
+          subtitle="See how our Grid Bot compares with other trading strategies"
+          highlight="grid"
+          features={comparisonFeatures}
           className="mt-16"
         />
       </div>
