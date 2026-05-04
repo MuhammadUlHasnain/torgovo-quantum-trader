@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
@@ -7,26 +6,36 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface ComparisonFeature {
+export type BotColumnKey = "signal" | "grid" | "martingale" | "quantumAi";
+
+export interface ComparisonFeature {
   name: string;
-  aiGridBot: boolean | string;
-  competitor1?: boolean | string;
-  competitor2?: boolean | string;
-  competitor3?: boolean | string;
+  signal: boolean | string;
+  grid: boolean | string;
+  martingale: boolean | string;
+  quantumAi: boolean | string;
 }
 
 interface ComparisonTableProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   subtitle?: string;
-  competitors: string[];
   features: ComparisonFeature[];
+  /** Which column to highlight as the focus of the current page */
+  highlight?: BotColumnKey;
 }
+
+const COLUMNS: { key: BotColumnKey; label: string }[] = [
+  { key: "signal", label: "Signal Bot" },
+  { key: "grid", label: "Grid Bot" },
+  { key: "martingale", label: "Martingale Bot" },
+  { key: "quantumAi", label: "QuantumAI Bot" },
+];
 
 const ComparisonTable: React.FC<ComparisonTableProps> = ({
   title,
   subtitle,
-  competitors,
   features,
+  highlight = "quantumAi",
   className,
   ...props
 }) => {
@@ -36,33 +45,43 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const ctxRef: { current: gsap.Context | null } = { current: null };
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      ctxRef.current = gsap.context(() => {
         if (headerRef.current) {
-          gsap.fromTo(headerRef.current,
+          gsap.fromTo(
+            headerRef.current,
             { y: 40, opacity: 0 },
             {
-              y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
               scrollTrigger: { trigger: headerRef.current, start: "top 90%", toggleActions: "play none none none" },
             }
           );
         }
-
         if (tableRef.current) {
-          gsap.fromTo(tableRef.current,
+          gsap.fromTo(
+            tableRef.current,
             { y: 60, opacity: 0, scale: 0.95 },
             {
-              y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out",
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "power3.out",
               scrollTrigger: { trigger: tableRef.current, start: "top 90%", toggleActions: "play none none none" },
             }
           );
         }
       });
-      ctxRef.current = ctx;
     }, 50);
 
-    let ctxRef = { current: null as gsap.Context | null };
-    return () => { clearTimeout(timer); ctxRef.current?.revert(); };
+    return () => {
+      clearTimeout(timer);
+      ctxRef.current?.revert();
+    };
   }, []);
 
   return (
@@ -80,12 +99,15 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
             <thead>
               <tr className="border-b">
                 <th className="p-4 text-left">Features</th>
-                <th className="p-4 text-center bg-torgovo-purple/10 text-torgovo-purple">
-                  AI Powered Grid Bot
-                </th>
-                {competitors.map((competitor, index) => (
-                  <th key={index} className="p-4 text-center">
-                    {competitor}
+                {COLUMNS.map((col) => (
+                  <th
+                    key={col.key}
+                    className={cn(
+                      "p-4 text-center",
+                      col.key === highlight && "bg-torgovo-purple/10 text-torgovo-purple"
+                    )}
+                  >
+                    {col.label}
                   </th>
                 ))}
               </tr>
@@ -94,22 +116,17 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
               {features.map((feature, index) => (
                 <tr key={index} className="border-b last:border-b-0">
                   <td className="p-4">{feature.name}</td>
-                  <td className="p-4 text-center bg-torgovo-purple/5">
-                    {renderValue(feature.aiGridBot, true)}
-                  </td>
-                  <td className="p-4 text-center">
-                    {renderValue(feature.competitor1)}
-                  </td>
-                  {feature.competitor2 !== undefined && (
-                    <td className="p-4 text-center">
-                      {renderValue(feature.competitor2)}
+                  {COLUMNS.map((col) => (
+                    <td
+                      key={col.key}
+                      className={cn(
+                        "p-4 text-center",
+                        col.key === highlight && "bg-torgovo-purple/5"
+                      )}
+                    >
+                      {renderValue(feature[col.key], col.key === highlight)}
                     </td>
-                  )}
-                  {feature.competitor3 !== undefined && (
-                    <td className="p-4 text-center">
-                      {renderValue(feature.competitor3)}
-                    </td>
-                  )}
+                  ))}
                 </tr>
               ))}
             </tbody>
@@ -120,28 +137,20 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
   );
 };
 
-function renderValue(
-  value: boolean | string | undefined,
-  isAiGridBot = false
-) {
+function renderValue(value: boolean | string | undefined, isHighlight = false) {
   if (value === undefined) return null;
   if (typeof value === "boolean") {
     if (value) {
       return (
         <Check
-          className={`h-5 w-5 mx-auto ${
-            isAiGridBot ? "text-torgovo-purple" : "text-torgovo-blue"
-          }`}
+          className={`h-5 w-5 mx-auto ${isHighlight ? "text-torgovo-purple" : "text-torgovo-blue"}`}
         />
       );
-    } else {
-      return <X className="h-5 w-5 mx-auto text-muted-foreground" />;
     }
+    return <X className="h-5 w-5 mx-auto text-muted-foreground" />;
   }
   return (
-    <span className={isAiGridBot ? "text-torgovo-purple font-medium" : ""}>
-      {value}
-    </span>
+    <span className={isHighlight ? "text-torgovo-purple font-medium" : ""}>{value}</span>
   );
 }
 
