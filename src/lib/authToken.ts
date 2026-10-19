@@ -1,44 +1,24 @@
 /**
- * Auth token storage helper.
- *
- * Tokens are kept in module memory first (most XSS-resistant option available
- * on the client) and mirrored to sessionStorage so the session survives a
- * page reload within the same tab. sessionStorage is preferred over
- * localStorage because it is scoped to the tab and cleared on close, which
- * shrinks the window for token theft compared to persistent localStorage.
- *
- * For best-in-class security, the backend should issue tokens as
- * `httpOnly; Secure; SameSite=Strict` cookies so JavaScript cannot read them
- * at all. This helper is a defense-in-depth improvement until that is in place.
+ * Auth token storage helper (access + refresh).
+ * In-memory first, mirrored to tab-scoped sessionStorage so a reload keeps
+ * the session. Legacy localStorage tokens are migrated off on first read.
  */
 
-const STORAGE_KEY = "authToken";
+const ACCESS_KEY = "authToken";
+const REFRESH_KEY = "refreshToken";
 
-let inMemoryToken: string | null = null;
+const mem: Record<string, string | null> = { [ACCESS_KEY]: null, [REFRESH_KEY]: null };
 
-function readFromSession(): string | null {
+function read(key: string): string | null {
+  if (mem[key]) return mem[key];
   try {
-    return typeof sessionStorage !== "undefined"
-      ? sessionStorage.getItem(STORAGE_KEY)
-      : null;
-  } catch {
-    return null;
-  }
-}
-
-function migrateLegacyLocalStorage(): string | null {
-  try {
-    if (typeof localStorage === "undefined") return null;
-    const legacy = localStorage.getItem(STORAGE_KEY);
+    const s = sessionStorage.getItem(key);
+    if (s) return (mem[key] = s);
+    const legacy = localStorage.getItem(key);
     if (legacy) {
-      // Move the token off localStorage to reduce XSS exfiltration surface.
-      localStorage.removeItem(STORAGE_KEY);
-      try {
-        sessionStorage.setItem(STORAGE_KEY, legacy);
-      } catch {
-        /* ignore */
-      }
-      return legacy;
+      localStorage.removeItem(key);
+      sessionStorage.setItem(key, legacy);
+      return (mem[key] = legacy);
     }
   } catch {
     /* ignore */
@@ -46,44 +26,28 @@ function migrateLegacyLocalStorage(): string | null {
   return null;
 }
 
-export function getAuthToken(): string | null {
-  if (inMemoryToken) return inMemoryToken;
-  const fromSession = readFromSession();
-  if (fromSession) {
-    inMemoryToken = fromSession;
-    return inMemoryToken;
+function write(key: string, value: string | null) {
+  mem[key] = value;
+  try {
+    if (value) sessionStorage.setItem(key, value);
+    else sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
+  } catch {
+    /* ignore */
   }
-  const migrated = migrateLegacyLocalStorage();
-  if (migrated) {
-    inMemoryToken = migrated;
-  }
-  return inMemoryToken;
 }
 
-export function setAuthToken(token: string): void {
-  inMemoryToken = token;
-  try {
-    sessionStorage.setItem(STORAGE_KEY, token);
-  } catch {
-    /* ignore */
-  }
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-  } catch {
-    /* ignore */
-  }
+export const getAuthToken = () => read(ACCESS_KEY);
+export const setAuthToken = (t: string) => write(ACCESS_KEY, t);
+export const getRefreshToken = () => read(REFRESH_KEY);
+export const setRefreshToken = (t: string) => write(REFRESH_KEY, t);
+
+export function setTokens(access: string, refresh: string) {
+  setAuthToken(access);
+  setRefreshToken(refresh);
 }
 
 export function clearAuthToken(): void {
-  inMemoryToken = null;
-  try {
-    sessionStorage.removeItem(STORAGE_KEY);
-  } catch {
-    /* ignore */
-  }
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-  } catch {
-    /* ignore */
-  }
+  write(ACCESS_KEY, null);
+  write(REFRESH_KEY, null);
 }
