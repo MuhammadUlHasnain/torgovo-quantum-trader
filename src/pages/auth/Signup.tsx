@@ -25,6 +25,8 @@ const signupSchema = z
     firstName: z.string().min(2, { message: "First name must be at least 2 characters" }),
     lastName: z.string().min(2, { message: "Last name must be at least 2 characters" }),
     email: z.string().email({ message: "Please enter a valid email address" }),
+    username: z.string().min(3, { message: "Username must be at least 3 characters" }),
+    phoneNumber: z.string().regex(/^\+\d{8,15}$/, { message: "Use international format, e.g. +923001234567" }),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters" })
@@ -84,11 +86,38 @@ const Signup = () => {
     return "bg-green-500";
   };
 
-  const onSubmit = (values: SignupFormValues) => {
-    // Here we would typically make an API call to register the user.
-    // Never log credentials — even in development.
-    toast.success("Account created successfully! Please check your email for verification.");
-    // Redirect or show verification screen
+  const onSubmit = async (values: SignupFormValues) => {
+    try {
+      const ref = new URLSearchParams(window.location.search).get("ref") || undefined;
+      const r = await authApi.register({
+        first_name: values.firstName,
+        last_name: values.lastName,
+        email: values.email,
+        username: values.username,
+        phone_number: values.phoneNumber,
+        password: values.password,
+        password_confirm: values.confirmPassword,
+        referral_code: ref,
+        terms_accepted: values.terms,
+        privacy_policy_accepted: values.terms,
+      });
+      setUser(r.user);
+      toast.success("Account created! Please check your email for verification.");
+      navigate("/dashboard", { replace: true });
+    } catch (err) {
+      if (err instanceof ApiError && err.fieldErrors) {
+        const map: Record<string, keyof SignupFormValues> = {
+          first_name: "firstName", last_name: "lastName", email: "email", username: "username",
+          phone_number: "phoneNumber", password: "password", password_confirm: "confirmPassword",
+          terms_accepted: "terms", privacy_policy_accepted: "terms",
+        };
+        Object.entries(err.fieldErrors).forEach(([k, msgs]) => {
+          const f = map[k];
+          if (f) form.setError(f, { message: msgs?.[0] });
+        });
+      }
+      toast.error(errorMessage(err));
+    }
   };
 
   return (
