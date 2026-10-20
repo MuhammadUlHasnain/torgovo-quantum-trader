@@ -37,6 +37,10 @@ import InvestInBot from "./pages/dashboard/InvestInBot";
 import CreateSignalBot from "./pages/dashboard/CreateSignalBot";
 import Withdrawals from "./pages/dashboard/Withdrawals";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AdminRoute from "./components/auth/AdminRoute";
+import { AuthProvider } from "./contexts/AuthContext";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import { AdminDashboard, AdminUsers, AdminBots, AdminTradeLogs, AdminDeposits, AdminEmails } from "./pages/dashboard/admin/AdminPages";
 import CustomCursor from "./components/effects/CustomCursor";
 import ScrollReveal from "./components/effects/ScrollReveal";
 
@@ -45,6 +49,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
+    <AuthProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -72,6 +77,7 @@ const App = () => (
             
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/signup" element={<Signup />} />
+            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
             
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<DashboardLayout />}>
@@ -86,6 +92,14 @@ const App = () => (
                 <Route path="create-signal-bot" element={<CreateSignalBot />} />
                 <Route path="create-custom-bot" element={<CreateSignalBot />} />
                 <Route path="withdrawals" element={<Withdrawals />} />
+                <Route path="admin" element={<AdminRoute />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="users" element={<AdminUsers />} />
+                  <Route path="bots" element={<AdminBots />} />
+                  <Route path="trade-logs" element={<AdminTradeLogs />} />
+                  <Route path="deposits" element={<AdminDeposits />} />
+                  <Route path="emails" element={<AdminEmails />} />
+                </Route>
               </Route>
             </Route>
             
@@ -93,6 +107,7 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
+    </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );

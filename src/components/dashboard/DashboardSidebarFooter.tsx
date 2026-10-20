@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { User, Settings, LogOut, Bell } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const DashboardSidebarFooter = () => {
   const [notifications, setNotifications] = useState(3);
+  const { logout } = useAuth();
 
   return (
     <SidebarFooter>
@@ -30,7 +32,7 @@ const DashboardSidebarFooter = () => {
               <span>Settings</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => logout()}>
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>
             </DropdownMenuItem>

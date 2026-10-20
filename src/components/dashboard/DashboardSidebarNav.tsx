@@ -2,9 +2,20 @@
 import React from 'react';
 import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 import { Input } from '@/components/ui/input';
-import { Home, Bot, PlusCircle, LineChart, Settings, HelpCircle, Database, Search, TrendingUp, Wallet, DollarSign } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Shield, Users, ScrollText, Inbox, Mail, Cpu, Home, Bot, PlusCircle, LineChart, Settings, HelpCircle, Database, Search, TrendingUp, Wallet, DollarSign } from 'lucide-react';
+
+const adminLinks = [
+  { href: '/dashboard/admin', label: 'Admin Overview', Icon: Shield },
+  { href: '/dashboard/admin/users', label: 'Users', Icon: Users },
+  { href: '/dashboard/admin/bots', label: 'All Bots', Icon: Cpu },
+  { href: '/dashboard/admin/trade-logs', label: 'Trade Logs', Icon: ScrollText },
+  { href: '/dashboard/admin/deposits', label: 'Deposit Approvals', Icon: Inbox },
+  { href: '/dashboard/admin/emails', label: 'Send Email', Icon: Mail },
+];
 
 const DashboardSidebarNav = () => {
+  const { isStaff } = useAuth();
   return (
     <SidebarContent>
       <SidebarGroup>
@@ -117,6 +128,20 @@ const DashboardSidebarNav = () => {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
+      {isStaff && (
+        <SidebarGroup>
+          <SidebarGroupLabel>Admin</SidebarGroupLabel>
+          <SidebarMenu>
+            {adminLinks.map(({ href, label, Icon }) => (
+              <SidebarMenuItem key={href}>
+                <SidebarMenuButton asChild tooltip={label}>
+                  <a href={href}><Icon /><span>{label}</span></a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+      )}
     </SidebarContent>
   );
 };

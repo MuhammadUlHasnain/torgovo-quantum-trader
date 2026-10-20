@@ -3,7 +3,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { authApi } from "@/lib/services";
+import { ApiError, errorMessage } from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +32,9 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { setUser } = useAuth();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -39,12 +45,19 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (values: LoginFormValues) => {
-    // Here we would typically make an API call to authenticate the user.
-    // Never log credentials — even in development.
-    toast.success("Login successful!");
-    // Redirect to dashboard after successful login
-    // window.location.href = "/dashboard";
+  const onSubmit = async (values: LoginFormValues) => {
+    try {
+      const r = await authApi.login({ email: values.email, password: values.password });
+      setUser(r.user);
+      toast.success(r.message || "Login successful!");
+      navigate((location.state as any)?.from || "/dashboard", { replace: true });
+    } catch (err) {
+      if (err instanceof ApiError && err.code === "LOCKED_OUT") {
+        toast.error("Too many failed attempts. Your account is locked for 15 minutes.");
+      } else {
+        toast.error(errorMessage(err));
+      }
+    }
   };
 
   return (
