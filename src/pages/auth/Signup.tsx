@@ -19,6 +19,10 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { authApi } from "@/lib/services";
+import { ApiError, errorMessage } from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
 
 const signupSchema = z
   .object({
@@ -49,6 +53,8 @@ const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [passwordStrength, setPasswordStrength] = React.useState(0);
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
@@ -56,6 +62,8 @@ const Signup = () => {
       firstName: "",
       lastName: "",
       email: "",
+      username: "",
+      phoneNumber: "",
       password: "",
       confirmPassword: "",
       terms: false,
@@ -174,7 +182,29 @@ const Signup = () => {
               />
             </div>
             
+                        <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl><Input placeholder="satoshi" autoComplete="username" {...field} /></FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone number</FormLabel>
+                  <FormControl><Input placeholder="+923001234567" type="tel" autoComplete="tel" {...field} /></FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+<FormField
               control={form.control}
               name="email"
               render={({ field }) => (
