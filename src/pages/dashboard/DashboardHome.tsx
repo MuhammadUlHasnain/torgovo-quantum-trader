@@ -2,6 +2,8 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowUpRight, Bot, LineChart, Activity, TrendingUp, TrendingDown, Percent, DollarSign, PlusCircle, Database, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { AdminStatsCards } from "./admin/AdminPages";
 
 // Mock data for charts - In a real app, this would come from an API
 const performanceData = [
@@ -23,8 +25,15 @@ const activeBots = [
 ];
 
 const DashboardHome = () => {
+  const { isStaff } = useAuth();
   return (
     <div className="space-y-6">
+      {isStaff && (
+        <div className="space-y-3">
+          <h2 className="text-lg font-semibold">Platform overview (admin)</h2>
+          <AdminStatsCards />
+        </div>
+      )}
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
