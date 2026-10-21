@@ -189,3 +189,67 @@ export interface PayoutRequestRow {
 export type AdminDashboardStats = Record<string, any>;
 export type AdminUser = User & { is_active?: boolean; is_restricted?: boolean };
 export interface AdminSendEmailRequest { subject: string; message: string; recipients?: string[]; send_to_all?: boolean; }
+
+// ---------- 2FA / verification (§2.4) ----------
+export interface TwoFactorSetupResponse { secret: string; otpauth_uri: string; }
+export interface DeactivateResponse { message: string; sessions_revoked: number; }
+
+// ---------- Trading app (§6.2) ----------
+export interface ExchangeListResponse { success: boolean; data: Exchange[]; }
+export interface ExchangeSymbolsResponse { success: boolean; exchange: string; symbols: string[]; }
+
+// ---------- Subscriptions (§4) ----------
+export interface PlanListResponse { plans: SubscriptionPlan[]; }
+export type BillingCycle = "monthly" | "quarterly" | "yearly";
+/** my-subscription/ is always 200: either a flat subscription object or {"subscription": null}. */
+export type MySubscriptionResponse = BotSubscription | { subscription: BotSubscription | null };
+export interface BotUsage {
+  signals_used_this_month: number;
+  monthly_signal_limit: number;
+  [key: string]: any;
+}
+export interface TelegramSubscribeRequest {
+  plan_id: string;
+  telegram_handle: string;
+  billing_cycle?: BillingCycle;
+  payment_transaction_hash?: string;
+  payment_blockchain?: string;
+}
+
+// ---------- Payment codes (§8, G2/FR A3) ----------
+export interface PaymentCoin {
+  id: string;
+  coin: string;
+  chain: string;
+  deposit_address: string | null;
+  network_fee: string;
+  [key: string]: any;
+}
+export interface PaymentQuote {
+  coin: PaymentCoin;
+  fiat_amount: string;
+  rate: string;
+  crypto_amount: string;
+  expires_at: string;
+  is_expired: boolean;
+}
+export interface PaymentCode {
+  code: string;
+  fiat_amount: string;
+  status: "awaiting_payment" | "submitted" | "approved" | "rejected";
+  quote_window_expires_at?: string;
+  quote?: PaymentQuote;
+  locked_rate?: string | null;
+  locked_crypto_amount?: string | null;
+  order_kind?: "telegram_signal" | "bot";
+  plan_id?: string;
+  billing_cycle?: BillingCycle;
+  created_at?: string;
+  [key: string]: any;
+}
+export interface CreatePaymentCodeRequest {
+  order_kind: "telegram_signal" | "bot";
+  plan_id: string;
+  billing_cycle?: BillingCycle;
+}
+
