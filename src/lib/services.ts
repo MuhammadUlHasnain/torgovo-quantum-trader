@@ -3,7 +3,7 @@
 import { api } from "./api";
 import { clearAuthToken, getRefreshToken, setTokens } from "./authToken";
 import type {
-  AdminDashboardStats, AdminSendEmailRequest, AdminUser, ApiError, BillingCycle, BotSubscription,
+  AdminDashboardStats, AdminSendEmailRequest, AdminUser, BillingCycle, BotSubscription,
   BotUsage, CreateCredentialsRequest, CreatePaymentCodeRequest, DeactivateResponse, Exchange,
   ExchangeCredentials, ExchangeListResponse, ExchangeSymbolsResponse, InvestorDeposit,
   LoginRequest, LoginResponse, MySubscriptionResponse, Order, PaginatedResponse, PaymentCode,
@@ -224,4 +224,4 @@ export function asPayoutRequests(data: { payout_requests: PayoutRequestRow[] } |
   return Array.isArray(data) ? data : (data.payout_requests ?? []);
 }
 
-export type { ApiError, BillingCycle, BotSubscription, SubscriptionPlan };
+export type { BillingCycle, BotSubscription, SubscriptionPlan };
